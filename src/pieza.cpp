@@ -44,7 +44,7 @@ void Pieza::seleccionar(int ix, int iz, int turnFlag, Tablero& platform) {
     platform.resetTileColors();
     Reglas::displayValidMoves(val, seleccion, board, platform.getTiles());
 }
-void Pieza::guardarTablero(const std::string& filename, bool turnFlag, bool openingFlag) {
+void Pieza::guardarTablero(const std::string& filename, bool turnFlag) {
     deseleccionar();
     std::ofstream file(filename);
     if (!file) {
@@ -57,10 +57,10 @@ void Pieza::guardarTablero(const std::string& filename, bool turnFlag, bool open
         }
         file << '\n';
     }
-    file << turnFlag << openingFlag << '\n';
+    file << turnFlag << '\n';
     std::cout << "Ultimo tablero guardado exitosamente.\n";
 }
-void Pieza::cargarTablero(const std::string& filename, bool& turnFlag, bool& openingFlag) {
+void Pieza::cargarTablero(const std::string& filename, bool& turnFlag) {
     std::ifstream file(filename);
     if (!file) {
         std::cerr << "Error. No se pudo cargar el ultimo tablero guardado.\n";
@@ -71,7 +71,7 @@ void Pieza::cargarTablero(const std::string& filename, bool& turnFlag, bool& ope
             file >> board[x][z];
         }
     }
-    file >> turnFlag >> openingFlag;
+    file >> turnFlag;
     std::cout << "Ultimo tablero guardado cargado exitosamente\n";
 }
 void Pieza::setMode(bool omod) {

@@ -36,8 +36,8 @@ public: // Miembros accesibles desde cualquier parte en la que se añade la clase
     void deseleccionar();
     void seleccionar(int ix, int iz, int turnFlag, Tablero& platform);
 
-    void guardarTablero(const std::string& filename, bool turnFlag, bool openingFlag);
-    void cargarTablero(const std::string& filename, bool& turnFlag, bool& openingFlag);
+    void guardarTablero(const std::string& filename, bool turnFlag);
+    void cargarTablero(const std::string& filename, bool& turnFlag);
     void setMode(bool omod);
 
     Pieza* createPiece(int pieceValue) const;

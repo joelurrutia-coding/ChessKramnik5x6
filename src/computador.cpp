@@ -12,8 +12,7 @@ Computador::Computador():
 {}
 Computador::~Computador() {}
 
-void Computador::makeMoveOpening(bool openingFlag, bool turnFlag, bool autopilotFlag,
-    std::array<std::array<int, 6>, 5>& board)
+void Computador::makeMoveOpening(bool openingFlag, bool turnFlag, bool autopilotFlag, std::array<std::array<int, 6>, 5>& board)
 {
     if (!openingFlag || !turnFlag || !autopilotFlag)
         return;
@@ -136,7 +135,6 @@ bool Computador::makeMoveKingSafe(bool turnFlag, bool autopilotFlag, std::array<
                         newKingPos = enemyPos;  // El rey se mueve a la casilla destino
                     else
                         newKingPos = Reglas::kingFinder(1, boardCopy);
-
                     if (newKingPos.x == -1)
                         continue;
 

@@ -140,11 +140,12 @@ void Mundo::tecla(unsigned char key) {
                 inicializa();
                 break;
             case 'g': case 'G':
-                piezas.guardarTablero("lastboard.txt", turnFlag, openingFlag);
+                piezas.guardarTablero("lastboard.txt", turnFlag);
                 break;
             case 'c': case 'C':
                 inicializa();
-                piezas.cargarTablero("lastboard.txt", turnFlag, openingFlag);
+                piezas.cargarTablero("lastboard.txt", turnFlag);
+                openingFlag = false;
                 if (turnFlag) {
                     rotationFlag = true;
                     targetAngle = angle + 3.14159265f;
@@ -240,6 +241,9 @@ void Mundo::rightClick(int mouseX, int mouseY) {
 
                 piezas.deseleccionar();
                 platform.resetTileColors();
+                if (!autopilotFlag, turnFlag) {
+                    openingFlag = false;
+                }
                 turnFlag = !turnFlag;
                 rotationFlag = true;
                 targetAngle = angle + 3.14159265f;
