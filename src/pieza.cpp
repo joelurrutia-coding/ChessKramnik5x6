@@ -141,6 +141,15 @@ void Pieza::dibuja() const {
             int value = board[x][z];
             if (value == 0)
                 continue;
+            // Coronazion del peon
+            if (value == 1 && z == 5) {
+				value = 5; // Reina
+                const_cast<std::array<std::array<int, 6>, 5>&>(board)[x][z] = value;
+			}
+			else if (value == -1 && z == 0) {
+				value = -5; // Reina
+                const_cast<std::array<std::array<int, 6>, 5>&>(board)[x][z] = value;
+            }
             Pieza* piece = createPiece(value);
             if (!piece)
                 continue;

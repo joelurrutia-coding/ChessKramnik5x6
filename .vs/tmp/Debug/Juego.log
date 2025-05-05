@@ -1,0 +1,4 @@
+﻿  pieza.cpp
+C:\Users\prestamo_admin\Desktop\UPM\UPM - Asignaturas\UPM - S6\6 - Informática Ind\AjedrezKramnik\src\pieza.cpp(156,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\prestamo_admin\Desktop\UPM\UPM - Asignaturas\UPM - S6\6 - Informática Ind\AjedrezKramnik\src\pieza.cpp(156,34): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Juego.vcxproj -> C:\Users\prestamo_admin\Desktop\UPM\UPM - Asignaturas\UPM - S6\6 - Informática Ind\AjedrezKramnik\bin\Juego.exe

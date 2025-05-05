@@ -34,25 +34,38 @@ void Computador::makeMoveOpening(bool openingFlag, bool turnFlag, bool autopilot
 bool Computador::makeMove(bool turnFlag, bool autopilotFlag, std::array<std::array<int, 6>, 5>& board) {
     if (autopilotFlag != 1 || turnFlag != 1)
         return false;
+
     vector2D kingPos = Reglas::kingFinder(1, board);
     if (kingPos.x == -1) {
         std::cout << "Rey negro no encontrado\n";
         return false;
     }
+
     bool foundMove = false;
+
     for (int x = 0; x < 5; x++) {
         for (int z = 0; z < 6; z++) {
             int attackerVal = board[x][z];
-            if (attackerVal >= 0) // Solo piezas negras (valores negativos)
-                continue;
-            vector2D attackerPos((float)x, (float)z);
-            // Recorrer todas las posibles celdas destino de la pieza
+            if (attackerVal >= 0)
+                continue; // Solo piezas negras
+            vector2D attackerPos(static_cast<float>(x), static_cast<float>(z));
+
             for (int destX = 0; destX < 5; destX++) {
                 for (int destZ = 0; destZ < 6; destZ++) {
                     if (x == destX && z == destZ)
                         continue;
-                    vector2D enemyPos((float)destX, (float)destZ);
+                    vector2D enemyPos(static_cast<float>(destX), static_cast<float>(destZ));
                     if (!Reglas::moveChecker(attackerVal, attackerPos, enemyPos, board))
+                        continue;
+
+                    // Simular el movimiento en una copia del tablero
+                    std::array<std::array<int, 6>, 5> boardCopy = board;
+                    boardCopy[destX][destZ] = attackerVal;
+                    boardCopy[x][z] = 0;
+                    Tablero platformCopy;
+
+                    // Verificar que el movimiento no deje al rey en jaque
+                    if (Reglas::jaque(!turnFlag, boardCopy, platformCopy.getTiles()))
                         continue;
                     int enemyVal = board[destX][destZ];
                     if (!foundMove) {
@@ -63,7 +76,8 @@ bool Computador::makeMove(bool turnFlag, bool autopilotFlag, std::array<std::arr
                         foundMove = true;
                     }
                     else {
-                        if (enemyVal > movEnemyVal || (enemyVal == movEnemyVal && attackerVal > movAttackerVal)) {
+                        if (enemyVal > movEnemyVal ||
+                            (enemyVal == movEnemyVal && attackerVal > movAttackerVal)) {
                             movAttackerPos = attackerPos;
                             movAttackerVal = attackerVal;
                             movEnemyPos = enemyPos;
@@ -77,12 +91,11 @@ bool Computador::makeMove(bool turnFlag, bool autopilotFlag, std::array<std::arr
     if (foundMove &&
         movAttackerPos.x != -1 && movAttackerPos.z != -1 &&
         movEnemyPos.x != -1 && movEnemyPos.z != -1) {
-
         imprimirComputerMov(movAttackerVal, movAttackerPos, movEnemyPos, board);
         return true;
     }
     else {
-        std::cout << "Computadora no encontro movimiento valido.\n";
+        std::cout << "Computadora no encontró movimiento válido.\n";
         return false;
     }
 }
