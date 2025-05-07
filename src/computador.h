@@ -7,6 +7,10 @@ private:
     int movAttackerVal;
     vector2D movEnemyPos;
     int movEnemyVal;
+    vector2D movOrigPos;
+    int movOrigVal;
+    vector2D movDestPos;
+    int movDestVal;
 
 public:
     Computador();

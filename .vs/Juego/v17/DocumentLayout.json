@@ -7,6 +7,14 @@
       "RelativeMoniker": "D:0:0:{E575FADE-B6EB-4154-A1ED-8067A12EAE98}|Juego.vcxproj|solutionrelative:src\\computador.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{E575FADE-B6EB-4154-A1ED-8067A12EAE98}|Juego.vcxproj|C:\\Users\\prestamo_admin\\Desktop\\UPM\\UPM - Asignaturas\\UPM - S6\\6 - Inform\u00E1tica Ind\\AjedrezKramnik\\src\\reglas.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{E575FADE-B6EB-4154-A1ED-8067A12EAE98}|Juego.vcxproj|solutionrelative:src\\reglas.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E575FADE-B6EB-4154-A1ED-8067A12EAE98}|Juego.vcxproj|C:\\Users\\prestamo_admin\\Desktop\\UPM\\UPM - Asignaturas\\UPM - S6\\6 - Inform\u00E1tica Ind\\AjedrezKramnik\\src\\computador.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{E575FADE-B6EB-4154-A1ED-8067A12EAE98}|Juego.vcxproj|solutionrelative:src\\computador.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{E575FADE-B6EB-4154-A1ED-8067A12EAE98}|Juego.vcxproj|C:\\Users\\prestamo_admin\\Desktop\\UPM\\UPM - Asignaturas\\UPM - S6\\6 - Inform\u00E1tica Ind\\AjedrezKramnik\\src\\mundo.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{E575FADE-B6EB-4154-A1ED-8067A12EAE98}|Juego.vcxproj|solutionrelative:src\\mundo.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
@@ -15,12 +23,12 @@
       "RelativeMoniker": "D:0:0:{E575FADE-B6EB-4154-A1ED-8067A12EAE98}|Juego.vcxproj|solutionrelative:src\\pieza.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E575FADE-B6EB-4154-A1ED-8067A12EAE98}|Juego.vcxproj|C:\\Users\\prestamo_admin\\Desktop\\UPM\\UPM - Asignaturas\\UPM - S6\\6 - Inform\u00E1tica Ind\\AjedrezKramnik\\src\\pieza.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{E575FADE-B6EB-4154-A1ED-8067A12EAE98}|Juego.vcxproj|solutionrelative:src\\pieza.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{E575FADE-B6EB-4154-A1ED-8067A12EAE98}|Juego.vcxproj|C:\\Users\\prestamo_admin\\Desktop\\UPM\\UPM - Asignaturas\\UPM - S6\\6 - Inform\u00E1tica Ind\\AjedrezKramnik\\src\\juego.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{E575FADE-B6EB-4154-A1ED-8067A12EAE98}|Juego.vcxproj|solutionrelative:src\\juego.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E575FADE-B6EB-4154-A1ED-8067A12EAE98}|Juego.vcxproj|C:\\Users\\prestamo_admin\\Desktop\\UPM\\UPM - Asignaturas\\UPM - S6\\6 - Inform\u00E1tica Ind\\AjedrezKramnik\\src\\pieza.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{E575FADE-B6EB-4154-A1ED-8067A12EAE98}|Juego.vcxproj|solutionrelative:src\\pieza.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,7 +38,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Bookmark",
@@ -46,55 +54,77 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "pieza.h",
-              "DocumentMoniker": "C:\\Users\\prestamo_admin\\Desktop\\UPM\\UPM - Asignaturas\\UPM - S6\\6 - Inform\u00E1tica Ind\\AjedrezKramnik\\src\\pieza.h",
-              "RelativeDocumentMoniker": "src\\pieza.h",
-              "ToolTip": "C:\\Users\\prestamo_admin\\Desktop\\UPM\\UPM - Asignaturas\\UPM - S6\\6 - Inform\u00E1tica Ind\\AjedrezKramnik\\src\\pieza.h",
-              "RelativeToolTip": "src\\pieza.h",
-              "ViewState": "AgIAABwAAAAAAAAAAAAAACYAAABCAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-05-05T21:54:44.613Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "juego.cpp",
-              "DocumentMoniker": "C:\\Users\\prestamo_admin\\Desktop\\UPM\\UPM - Asignaturas\\UPM - S6\\6 - Inform\u00E1tica Ind\\AjedrezKramnik\\src\\juego.cpp",
-              "RelativeDocumentMoniker": "src\\juego.cpp",
-              "ToolTip": "C:\\Users\\prestamo_admin\\Desktop\\UPM\\UPM - Asignaturas\\UPM - S6\\6 - Inform\u00E1tica Ind\\AjedrezKramnik\\src\\juego.cpp",
-              "RelativeToolTip": "src\\juego.cpp",
-              "ViewState": "AgIAABMAAAAAAAAAAAAnwCkAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-05-05T21:21:59.899Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "mundo.cpp",
-              "DocumentMoniker": "C:\\Users\\prestamo_admin\\Desktop\\UPM\\UPM - Asignaturas\\UPM - S6\\6 - Inform\u00E1tica Ind\\AjedrezKramnik\\src\\mundo.cpp",
-              "RelativeDocumentMoniker": "src\\mundo.cpp",
-              "ToolTip": "C:\\Users\\prestamo_admin\\Desktop\\UPM\\UPM - Asignaturas\\UPM - S6\\6 - Inform\u00E1tica Ind\\AjedrezKramnik\\src\\mundo.cpp",
-              "RelativeToolTip": "src\\mundo.cpp",
-              "ViewState": "AgIAAOAAAAAAAAAAAAAAAPAAAAAAAAAAAAAAAA==",
+              "Title": "reglas.cpp",
+              "DocumentMoniker": "C:\\Users\\prestamo_admin\\Desktop\\UPM\\UPM - Asignaturas\\UPM - S6\\6 - Inform\u00E1tica Ind\\AjedrezKramnik\\src\\reglas.cpp",
+              "RelativeDocumentMoniker": "src\\reglas.cpp",
+              "ToolTip": "C:\\Users\\prestamo_admin\\Desktop\\UPM\\UPM - Asignaturas\\UPM - S6\\6 - Inform\u00E1tica Ind\\AjedrezKramnik\\src\\reglas.cpp",
+              "RelativeToolTip": "src\\reglas.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-05-05T21:21:26.412Z",
+              "WhenOpened": "2025-05-07T16:20:05.671Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "computador.h",
+              "DocumentMoniker": "C:\\Users\\prestamo_admin\\Desktop\\UPM\\UPM - Asignaturas\\UPM - S6\\6 - Inform\u00E1tica Ind\\AjedrezKramnik\\src\\computador.h",
+              "RelativeDocumentMoniker": "src\\computador.h",
+              "ToolTip": "C:\\Users\\prestamo_admin\\Desktop\\UPM\\UPM - Asignaturas\\UPM - S6\\6 - Inform\u00E1tica Ind\\AjedrezKramnik\\src\\computador.h",
+              "RelativeToolTip": "src\\computador.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-07T14:37:37.696Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "pieza.h",
+              "DocumentMoniker": "C:\\Users\\prestamo_admin\\Desktop\\UPM\\UPM - Asignaturas\\UPM - S6\\6 - Inform\u00E1tica Ind\\AjedrezKramnik\\src\\pieza.h",
+              "RelativeDocumentMoniker": "src\\pieza.h",
+              "ToolTip": "C:\\Users\\prestamo_admin\\Desktop\\UPM\\UPM - Asignaturas\\UPM - S6\\6 - Inform\u00E1tica Ind\\AjedrezKramnik\\src\\pieza.h",
+              "RelativeToolTip": "src\\pieza.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-05T21:54:44.613Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "juego.cpp",
+              "DocumentMoniker": "C:\\Users\\prestamo_admin\\Desktop\\UPM\\UPM - Asignaturas\\UPM - S6\\6 - Inform\u00E1tica Ind\\AjedrezKramnik\\src\\juego.cpp",
+              "RelativeDocumentMoniker": "src\\juego.cpp",
+              "ToolTip": "C:\\Users\\prestamo_admin\\Desktop\\UPM\\UPM - Asignaturas\\UPM - S6\\6 - Inform\u00E1tica Ind\\AjedrezKramnik\\src\\juego.cpp",
+              "RelativeToolTip": "src\\juego.cpp",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAACkAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-05-05T21:21:59.899Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "mundo.cpp",
+              "DocumentMoniker": "C:\\Users\\prestamo_admin\\Desktop\\UPM\\UPM - Asignaturas\\UPM - S6\\6 - Inform\u00E1tica Ind\\AjedrezKramnik\\src\\mundo.cpp",
+              "RelativeDocumentMoniker": "src\\mundo.cpp",
+              "ToolTip": "C:\\Users\\prestamo_admin\\Desktop\\UPM\\UPM - Asignaturas\\UPM - S6\\6 - Inform\u00E1tica Ind\\AjedrezKramnik\\src\\mundo.cpp",
+              "RelativeToolTip": "src\\mundo.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC0AAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-05-05T21:21:26.412Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "pieza.cpp",
               "DocumentMoniker": "C:\\Users\\prestamo_admin\\Desktop\\UPM\\UPM - Asignaturas\\UPM - S6\\6 - Inform\u00E1tica Ind\\AjedrezKramnik\\src\\pieza.cpp",
               "RelativeDocumentMoniker": "src\\pieza.cpp",
               "ToolTip": "C:\\Users\\prestamo_admin\\Desktop\\UPM\\UPM - Asignaturas\\UPM - S6\\6 - Inform\u00E1tica Ind\\AjedrezKramnik\\src\\pieza.cpp",
               "RelativeToolTip": "src\\pieza.cpp",
-              "ViewState": "AgIAAEQAAAAAAAAAAAAYwG0AAAAVAAAAAAAAAA==",
+              "ViewState": "AgIAAIEAAAAAAAAAAAAAAG0AAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-05-05T14:47:16.492Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-05T14:47:16.492Z"
             },
             {
               "$type": "Document",
@@ -104,7 +134,7 @@
               "RelativeDocumentMoniker": "src\\computador.cpp",
               "ToolTip": "C:\\Users\\prestamo_admin\\Desktop\\UPM\\UPM - Asignaturas\\UPM - S6\\6 - Inform\u00E1tica Ind\\AjedrezKramnik\\src\\computador.cpp",
               "RelativeToolTip": "src\\computador.cpp",
-              "ViewState": "AgIAAJ0AAAAAAAAAAAAYwMYAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAKMAAAAAAAAAAAAAALQAAABnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-05-05T14:27:26.303Z",
               "EditorCaption": ""

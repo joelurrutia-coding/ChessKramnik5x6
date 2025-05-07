@@ -3,12 +3,14 @@
 #include "menu.h"
 
 #include <iostream>
-#include <cstdlib>
+#include <math.h>
 #include <string>
 
 Computador::Computador(): 
     movAttackerPos(-1, -1), movAttackerVal(0),
-    movEnemyPos(-1, -1), movEnemyVal(7)
+    movEnemyPos(-1, -1), movEnemyVal(7),
+    movOrigPos(-1, -1), movOrigVal(0),
+    movDestPos(-1, -1), movDestVal(7)
 {}
 Computador::~Computador() {}
 
@@ -39,48 +41,48 @@ bool Computador::makeMove(bool turnFlag, bool autopilotFlag, std::array<std::arr
         std::cout << "Rey negro no encontrado\n";
         return false;
     }
-
     bool foundMove = false;
 
     for (int x = 0; x < 5; x++) {
         for (int z = 0; z < 6; z++) {
-            int attackerVal = board[x][z];
-            if (attackerVal >= 0)
+            int origVal = board[x][z];
+            if (origVal >= 0)
                 continue; // Solo piezas negras
-            vector2D attackerPos(static_cast<float>(x), static_cast<float>(z));
+            vector2D origPos(static_cast<float>(x), static_cast<float>(z));
 
             for (int destX = 0; destX < 5; destX++) {
                 for (int destZ = 0; destZ < 6; destZ++) {
                     if (x == destX && z == destZ)
                         continue;
-                    vector2D enemyPos(static_cast<float>(destX), static_cast<float>(destZ));
-                    if (!Reglas::moveChecker(attackerVal, attackerPos, enemyPos, board))
+                    vector2D destPos(static_cast<float>(destX), static_cast<float>(destZ));
+                    if (!Reglas::moveChecker(origVal, origPos, destPos, board))
                         continue;
 
                     // Simular el movimiento en una copia del tablero
                     std::array<std::array<int, 6>, 5> boardCopy = board;
-                    boardCopy[destX][destZ] = attackerVal;
+                    boardCopy[destX][destZ] = origVal;
                     boardCopy[x][z] = 0;
                     Tablero platformCopy;
 
                     // Verificar que el movimiento no deje al rey en jaque
                     if (Reglas::jaque(!turnFlag, boardCopy, platformCopy.getTiles()))
                         continue;
-                    int enemyVal = board[destX][destZ];
+
+                    int destVal = board[destX][destZ];
                     if (!foundMove) {
-                        movAttackerPos = attackerPos;
-                        movAttackerVal = attackerVal;
-                        movEnemyPos = enemyPos;
-                        movEnemyVal = enemyVal;
+                        movOrigPos = origPos;
+                        movOrigVal = origVal;
+                        movDestPos = destPos;
+                        movDestVal = destVal;
                         foundMove = true;
                     }
                     else {
-                        if (enemyVal > movEnemyVal ||
-                            (enemyVal == movEnemyVal && attackerVal > movAttackerVal)) {
-                            movAttackerPos = attackerPos;
-                            movAttackerVal = attackerVal;
-                            movEnemyPos = enemyPos;
-                            movEnemyVal = enemyVal;
+                        if (destVal > movDestVal ||
+                            (destVal == movDestVal && origVal > movOrigVal)) {
+                            movOrigPos = origPos;
+                            movOrigVal = origVal;
+                            movDestPos = destPos;
+                            movDestVal = destVal;
                         }
                     }
                 }
@@ -88,9 +90,9 @@ bool Computador::makeMove(bool turnFlag, bool autopilotFlag, std::array<std::arr
         }
     }
     if (foundMove &&
-        movAttackerPos.x != -1 && movAttackerPos.z != -1 &&
-        movEnemyPos.x != -1 && movEnemyPos.z != -1) {
-        imprimirComputerMov(movAttackerVal, movAttackerPos, movEnemyPos, board);
+        movOrigPos.x != -1 && movOrigPos.z != -1 &&
+        movDestPos.x != -1 && movDestPos.z != -1) {
+        imprimirComputerMov(movOrigVal, movOrigPos, movDestPos, board);
         return true;
     }
     else {
@@ -102,72 +104,124 @@ bool Computador::makeMoveKingSafe(bool turnFlag, bool autopilotFlag, std::array<
     if (autopilotFlag != 1 || turnFlag != 1)
         return false;
 
+    // Ubicar al rey negro en el tablero original.
     vector2D kingPos = Reglas::kingFinder(1, board);
     if (kingPos.x == -1) {
         std::cout << "Rey negro no encontrado\n";
         return false;
     }
+    // Variables de candidato para cada opción (sin usar struct extra).
+    bool foundCapture = false, foundKing = false, foundBlock = false;
+    
+    vector2D bestCaptureOrigPos, bestCaptureDestPos;
+    int bestCaptureOrigVal = -7;      // En caso de empate, movemos el menos costoso para negros (mejor orig -1 que -6).
+    int bestCaptureDestVal = -7;      // Mayor valor capturado mejor, de -5 a +6.
 
-    bool foundMove = false;
-    bool done = false; // Bandera para salir de todos los bucles una vez encontrado un movimiento válido
+    vector2D bestKingOrigPos, bestKingDestPos;   // COMER O SER COMIDO PARA SOBREVIVIR
+    int bestKingOrigVal = -7;         // Movemos el rey negro (-6).
+    int bestKingDestVal = -7;         // Peor caso comer a la reina negra (-5), mejor caso comer al rey negro (+6).
 
-    for (int x = 0; x < 5 && !done; x++) {
-        for (int z = 0; z < 6 && !done; z++) {
-            int attackerVal = board[x][z];
-            if (attackerVal >= 0)
-                continue;  // Solo piezas negras
-            vector2D attackerPos(static_cast<float>(x), static_cast<float>(z));
+    vector2D bestBlockOrigPos, bestBlockDestPos;
+    int bestBlockOrigVal = -7;        // Para bloquear, se prefiere sacrificar la pieza de mayor valor (es decir, que cueste menos, ej. -1 es mejor que -5).
+    int bestBlockDestVal = -7;
 
-            for (int destX = 0; destX < 5 && !done; destX++) {
-                for (int destZ = 0; destZ < 6 && !done; destZ++) {
+    // Recorrer todas las piezas negras y sus movimientos posibles.
+    for (int x = 0; x < 5; x++) {
+        for (int z = 0; z < 6; z++) {
+            int origVal = board[x][z];
+            if (origVal >= 0)
+                continue;  // Sólo piezas negras.
+            vector2D origPos(static_cast<float>(x), static_cast<float>(z));
+
+            // Examinar cada casilla destino.
+            for (int destX = 0; destX < 5; destX++) {
+                for (int destZ = 0; destZ < 6; destZ++) {
                     if (x == destX && z == destZ)
                         continue;
-                    vector2D enemyPos(static_cast<float>(destX), static_cast<float>(destZ));
-                    if (!Reglas::moveChecker(attackerVal, attackerPos, enemyPos, board))
+                    vector2D destPos(static_cast<float>(destX), static_cast<float>(destZ));
+                    if (!Reglas::moveChecker(origVal, origPos, destPos, board))
                         continue;
 
+                    // Simular el movimiento en una copia del tablero y crear un objeto temporal Tablero.
                     std::array<std::array<int, 6>, 5> boardCopy = board;
-                    boardCopy[destX][destZ] = attackerVal;
+                    boardCopy[destX][destZ] = origVal;
                     boardCopy[x][z] = 0;
+                    Tablero platformCopy;
 
-                    vector2D newKingPos;
-                    if (abs(attackerVal) == 6)
-                        newKingPos = enemyPos;  // El rey se mueve a la casilla destino
-                    else
-                        newKingPos = Reglas::kingFinder(1, boardCopy);
-                    if (newKingPos.x == -1)
+                    // Verificar que el movimiento no deje al rey en jaque.
+                    if (Reglas::jaque(!turnFlag, boardCopy, platformCopy.getTiles()))
                         continue;
 
-                    // Verificar que la nueva posición del rey no esté bajo ataque
-                    bool kingSafe = true;
-                    for (int a = 0; a < 5 && kingSafe; a++) {
-                        for (int b = 0; b < 6 && kingSafe; b++) {
-                            int whitePiece = boardCopy[a][b];
-                            if (whitePiece <= 0)
-                                continue;
-                            vector2D whitePos(static_cast<float>(a), static_cast<float>(b));
-                            if (Reglas::moveChecker(whitePiece, whitePos, newKingPos, boardCopy))
-                                kingSafe = false;
+                    // Valor de la casilla destino en el tablero original
+                    int destVal = board[destX][destZ];
+
+                    // Opción A: Capturar al atacante (destVal > 0).
+                    if (destVal > 0) {
+                        if (!foundCapture || (destVal > bestCaptureDestVal) || (destVal == bestCaptureDestVal && origVal > bestCaptureOrigVal)) {
+                            bestCaptureOrigPos = origPos;
+                            bestCaptureDestPos = destPos;
+                            bestCaptureOrigVal = origVal;
+                            bestCaptureDestVal = destVal;
+                            foundCapture = true;
+                            //std::cout << "Capturar\n";
                         }
                     }
-                    if (kingSafe) { // Movimiento seguro para el rey
-                        movAttackerPos = attackerPos;
-                        movAttackerVal = attackerVal;
-                        movEnemyPos = enemyPos;
-                        movEnemyVal = board[destX][destZ];
-                        foundMove = true;
-                        done = true; // Salir de todos los bucles
+                    // Opción B: Mover el rey para esquivar el jaque (si la pieza a mover es el rey).
+                    if (origVal == -6 && destVal > bestKingDestVal) {
+                        if (!foundKing || (destVal > bestKingDestVal) || (destVal == bestKingDestVal && origVal > bestKingOrigVal)) {
+                            bestKingOrigPos = origPos;
+                            bestKingDestPos = destPos;
+                            bestKingOrigVal = origVal;
+                            bestKingDestVal = destVal;  
+                            foundKing = true;
+                            //std::cout << "Esquivar\n";
+                        }
+                    }
+                    // Opción C: Bloquear la línea de ataque (si no es rey ni caballo)
+                    if (origVal != -6 && origVal != -3 && destVal > bestBlockDestVal) { // destVal == 0
+                        if (destX == static_cast<int>(kingPos.x) || destZ == static_cast<int>(kingPos.z) ||
+                            (abs(destX - static_cast<int>(kingPos.x)) == abs(destZ - static_cast<int>(kingPos.z)))) {
+                            if (!foundBlock || (origVal > bestBlockOrigVal)) {
+                                bestBlockOrigPos = origPos;
+                                bestBlockDestPos = destPos;
+                                bestBlockOrigVal = origVal;
+                                bestBlockDestVal = destVal;
+                                foundBlock = true;
+                                //std::cout << "Bloqueo\n";
+                            }
+                        }
                     }
                 }
             }
         }
     }
-    if (foundMove) {
-        imprimirComputerMov(movAttackerVal, movAttackerPos, movEnemyPos, board);
+    // Prioridad de estrategias: capturar al enemigo atacante > mover el rey > bloquear el camino de ataque.
+    if (foundCapture) {
+        movOrigPos = bestCaptureOrigPos;
+        movOrigVal = bestCaptureOrigVal;
+        movDestPos = bestCaptureDestPos;
+        movDestVal = bestCaptureDestVal;
+        imprimirComputerMov(movOrigVal, movOrigPos, movDestPos, board);
+        return true;
+    }
+    else if (foundKing) {
+        movOrigPos = bestKingOrigPos;
+        movOrigVal = bestKingOrigVal;
+        movDestPos = bestKingDestPos;
+        movDestVal = bestKingDestVal;
+        imprimirComputerMov(movOrigVal, movOrigPos, movDestPos, board);
+        return true;
+    }
+    else if (foundBlock) {
+        movOrigPos = bestBlockOrigPos;
+        movOrigVal = bestBlockOrigVal;
+        movDestPos = bestBlockDestPos;
+        movDestVal = bestBlockDestVal;
+        imprimirComputerMov(movOrigVal, movOrigPos, movDestPos, board);
         return true;
     }
     else {
-        std::cout << "Computadora no encontró movimiento seguro para el rey.\n";
+        std::cout << "Computadora no encontro movimiento seguro para el rey.\n";
         return false;
     }
 }

@@ -49,9 +49,16 @@ void Mundo::cambiarOjo() {
         }
     }
     else {
-        x_ojo = 3.0f;
-        y_ojo = 6.45f;
-        z_ojo = 3.499f;
+        if (!turnFlag) {
+            x_ojo = 3.0f;
+            y_ojo = 6.45f;
+            z_ojo = 3.499f;
+        }
+        else {
+            x_ojo = 3.0f;
+            y_ojo = 6.45f;
+            z_ojo = 3.501f;
+        }
     }
 }
 void Mundo::modoVSmaquina() {
@@ -241,7 +248,7 @@ void Mundo::rightClick(int mouseX, int mouseY) {
 
                 piezas.deseleccionar();
                 platform.resetTileColors();
-                if (!autopilotFlag, turnFlag) {
+                if (!autopilotFlag && turnFlag) {
                     openingFlag = false;
                 }
                 turnFlag = !turnFlag;
@@ -252,10 +259,12 @@ void Mundo::rightClick(int mouseX, int mouseY) {
                     endFlag = true;
                     targetAngle = angle;
                     rotationFlag = false;
+                    //std::cout << "JaqueMate!\n";
 				}
 				else if (Reglas::jaqueMate(!turnFlag, piezas.getBoard(), platform.getTiles())) {
 					endFlag = true;
 					turnFlag = !turnFlag;
+                    //std::cout << "JaqueMate!\n";
 				}
                 else if (Reglas::jaque(!turnFlag, piezas.getBoard(), platform.getTiles())) {
                     jaqueFlag = true;
@@ -271,19 +280,23 @@ void Mundo::rightClick(int mouseX, int mouseY) {
                     }
                     else if (jaqueFlag) {
                         endFlag = !computer.makeMoveKingSafe(turnFlag, autopilotFlag, piezas.getBoard());
+                        //std::cout << "makeMoveSafeKing\n";
                     }
-                    else {
+                    else if (!jaqueFlag) {
                         endFlag = !computer.makeMove(turnFlag, autopilotFlag, piezas.getBoard());
+                        //std::cout << "makeMove\n";
                     }
                     turnFlag = !turnFlag;
                     targetAngle = angle;
                     rotationFlag = false;
                     if (Reglas::jaque(turnFlag, piezas.getBoard(), platform.getTiles())) {
                         endFlag = true;
+                        //std::cout << "JaqueMate!\n";
                     }
                     else if (Reglas::jaqueMate(!turnFlag, piezas.getBoard(), platform.getTiles())) {
                         endFlag = true;
                         turnFlag = !turnFlag;
+                        //std::cout << "JaqueMate!\n";
                     }
                     else if (Reglas::jaque(!turnFlag, piezas.getBoard(), platform.getTiles())) {
                         std::cout << "Jaque!\n";
