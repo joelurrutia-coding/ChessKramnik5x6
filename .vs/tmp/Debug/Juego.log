@@ -1,3 +1,0 @@
-﻿  computador.cpp
-C:\Users\prestamo_admin\Desktop\UPM\UPM - Asignaturas\UPM - S6\6 - Informática Ind\AjedrezKramnik\src\computador.cpp(22,25): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  Juego.vcxproj -> C:\Users\prestamo_admin\Desktop\UPM\UPM - Asignaturas\UPM - S6\6 - Informática Ind\AjedrezKramnik\bin\Juego.exe

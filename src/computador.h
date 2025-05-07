@@ -3,10 +3,6 @@
 
 class Computador {
 private:
-    vector2D movAttackerPos;
-    int movAttackerVal;
-    vector2D movEnemyPos;
-    int movEnemyVal;
     vector2D movOrigPos;
     int movOrigVal;
     vector2D movDestPos;

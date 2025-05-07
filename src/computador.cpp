@@ -7,10 +7,8 @@
 #include <string>
 
 Computador::Computador(): 
-    movAttackerPos(-1, -1), movAttackerVal(0),
-    movEnemyPos(-1, -1), movEnemyVal(7),
     movOrigPos(-1, -1), movOrigVal(0),
-    movDestPos(-1, -1), movDestVal(7)
+    movDestPos(-1, -1), movDestVal(-10)
 {}
 Computador::~Computador() {}
 
@@ -114,16 +112,16 @@ bool Computador::makeMoveKingSafe(bool turnFlag, bool autopilotFlag, std::array<
     bool foundCapture = false, foundKing = false, foundBlock = false;
     
     vector2D bestCaptureOrigPos, bestCaptureDestPos;
-    int bestCaptureOrigVal = -7;      // En caso de empate, movemos el menos costoso para negros (mejor orig -1 que -6).
-    int bestCaptureDestVal = -7;      // Mayor valor capturado mejor, de -5 a +6.
+    int bestCaptureOrigVal = 0;        // En caso de empate, movemos el menos costoso para negros (mejor orig -1 que -6).
+    int bestCaptureDestVal = -10;      // Mayor valor capturado mejor, de -5 a +6.
 
-    vector2D bestKingOrigPos, bestKingDestPos;   // COMER O SER COMIDO PARA SOBREVIVIR
-    int bestKingOrigVal = -7;         // Movemos el rey negro (-6).
-    int bestKingDestVal = -7;         // Peor caso comer a la reina negra (-5), mejor caso comer al rey negro (+6).
+    vector2D bestKingOrigPos, bestKingDestPos;   
+    //int bestKingOrigVal = -6;        // Movemos el rey negro (-6).
+    int bestKingDestVal = -10;         // Peor caso comer a la reina negra (-5), mejor caso comer al rey negro (+6).
 
     vector2D bestBlockOrigPos, bestBlockDestPos;
-    int bestBlockOrigVal = -7;        // Para bloquear, se prefiere sacrificar la pieza de mayor valor (es decir, que cueste menos, ej. -1 es mejor que -5).
-    int bestBlockDestVal = -7;
+    int bestBlockOrigVal = -10;        // Para bloquear, se prefiere sacrificar la pieza de mayor valor (es decir, que cueste menos, ej. -1 es mejor que -5).
+    int bestBlockDestVal = -10;
 
     // Recorrer todas las piezas negras y sus movimientos posibles.
     for (int x = 0; x < 5; x++) {
@@ -159,19 +157,19 @@ bool Computador::makeMoveKingSafe(bool turnFlag, bool autopilotFlag, std::array<
                     if (destVal > 0) {
                         if (!foundCapture || (destVal > bestCaptureDestVal) || (destVal == bestCaptureDestVal && origVal > bestCaptureOrigVal)) {
                             bestCaptureOrigPos = origPos;
-                            bestCaptureDestPos = destPos;
                             bestCaptureOrigVal = origVal;
                             bestCaptureDestVal = destVal;
+                            bestCaptureDestPos = destPos;
                             foundCapture = true;
                             //std::cout << "Capturar\n";
                         }
                     }
-                    // Opción B: Mover el rey para esquivar el jaque (si la pieza a mover es el rey).
+                    // Opción B: Mover el rey para esquivar el jaque.
                     if (origVal == -6 && destVal > bestKingDestVal) {
-                        if (!foundKing || (destVal > bestKingDestVal) || (destVal == bestKingDestVal && origVal > bestKingOrigVal)) {
+                        if (!foundKing || (destVal > bestKingDestVal) || (destVal == bestKingDestVal)) {
                             bestKingOrigPos = origPos;
+                            bestKingOrigVal = -6;
                             bestKingDestPos = destPos;
-                            bestKingOrigVal = origVal;
                             bestKingDestVal = destVal;  
                             foundKing = true;
                             //std::cout << "Esquivar\n";
@@ -206,7 +204,7 @@ bool Computador::makeMoveKingSafe(bool turnFlag, bool autopilotFlag, std::array<
     }
     else if (foundKing) {
         movOrigPos = bestKingOrigPos;
-        movOrigVal = bestKingOrigVal;
+        movOrigVal = -6;
         movDestPos = bestKingDestPos;
         movDestVal = bestKingDestVal;
         imprimirComputerMov(movOrigVal, movOrigPos, movDestPos, board);
