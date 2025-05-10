@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\prestamo_admin\\Desktop\\UPM\\UPM - Asignaturas\\UPM - S6\\6 - Inform\u00E1tica Ind\\AjedrezKramnik\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{E575FADE-B6EB-4154-A1ED-8067A12EAE98}|Juego.vcxproj|C:\\Users\\prestamo_admin\\Desktop\\UPM\\UPM - Asignaturas\\UPM - S6\\6 - Inform\u00E1tica Ind\\AjedrezKramnik\\src\\juego.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{E575FADE-B6EB-4154-A1ED-8067A12EAE98}|Juego.vcxproj|solutionrelative:src\\juego.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{E575FADE-B6EB-4154-A1ED-8067A12EAE98}|Juego.vcxproj|C:\\Users\\prestamo_admin\\Desktop\\UPM\\UPM - Asignaturas\\UPM - S6\\6 - Inform\u00E1tica Ind\\AjedrezKramnik\\src\\computador.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{E575FADE-B6EB-4154-A1ED-8067A12EAE98}|Juego.vcxproj|solutionrelative:src\\computador.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
@@ -31,6 +35,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "juego.cpp",
+              "DocumentMoniker": "C:\\Users\\prestamo_admin\\Desktop\\UPM\\UPM - Asignaturas\\UPM - S6\\6 - Inform\u00E1tica Ind\\AjedrezKramnik\\src\\juego.cpp",
+              "RelativeDocumentMoniker": "src\\juego.cpp",
+              "ToolTip": "C:\\Users\\prestamo_admin\\Desktop\\UPM\\UPM - Asignaturas\\UPM - S6\\6 - Inform\u00E1tica Ind\\AjedrezKramnik\\src\\juego.cpp",
+              "RelativeToolTip": "src\\juego.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-05-10T16:13:29.114Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "computador.cpp",
               "DocumentMoniker": "C:\\Users\\prestamo_admin\\Desktop\\UPM\\UPM - Asignaturas\\UPM - S6\\6 - Inform\u00E1tica Ind\\AjedrezKramnik\\src\\computador.cpp",
               "RelativeDocumentMoniker": "src\\computador.cpp",

@@ -15,7 +15,7 @@ int main(int argc, char* argv[]){
 	glutInit(&argc, argv);
 	glutInitWindowSize(1408, 792);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-	glutCreateWindow("ChessVariant");
+	glutCreateWindow("AjedrezKramnik");
 
 	glutSetWindow(glutGetWindow());
 	glutPositionWindow(52, 0);
