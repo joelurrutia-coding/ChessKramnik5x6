@@ -116,7 +116,7 @@ bool Computador::makeMoveKingSafe(bool turnFlag, bool autopilotFlag, std::array<
     int bestCaptureDestVal = -10;      // Mayor valor capturado mejor, de -5 a +6.
 
     vector2D bestKingOrigPos, bestKingDestPos;   
-    //int bestKingOrigVal = -6;        // Movemos el rey negro (-6).
+    int bestKingOrigVal = -6;        // Movemos el rey negro (-6).
     int bestKingDestVal = -10;         // Peor caso comer a la reina negra (-5), mejor caso comer al rey negro (+6).
 
     vector2D bestBlockOrigPos, bestBlockDestPos;
