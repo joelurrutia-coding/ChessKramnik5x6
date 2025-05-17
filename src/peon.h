@@ -7,6 +7,6 @@ public:
     Peon();
     virtual ~Peon();
 
-    virtual void dibujaIndividual() const;
+    virtual void dibuja() const override;
     bool mueve();
 };

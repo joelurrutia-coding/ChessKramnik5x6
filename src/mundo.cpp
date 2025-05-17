@@ -99,7 +99,7 @@ void Mundo::dibuja() {
         glPopMatrix();
 
         platform.dibuja();
-        piezas.dibuja();
+        piezas.dibujaTablero();
         break;
     case GAME_OVER:
         menu.setScreen(MENU_FINAL);
@@ -193,7 +193,7 @@ void Mundo::leftClick(int mouseX, int mouseY) {
     GLint viewport[4];               // X, Y, ANCHO, ALTURA DE LA PANTALLA
     GLdouble modelview[16];          // 4x4 CAMARA + MODELO DE VISTA
     GLdouble projection[16];         // 4x4 MATRIZ DE PROYECCION
-    GLfloat depthZ;                  // PROFUNDIDAD DEL CLICK EN 3D
+    GLfloat depthZ = 0;                  // PROFUNDIDAD DEL CLICK EN 3D
     GLdouble worldX, worldY, worldZ; // COORDENADAS 3D DEL MUNDO EN PANTALLA
 
     glGetDoublev(GL_MODELVIEW_MATRIX, modelview);

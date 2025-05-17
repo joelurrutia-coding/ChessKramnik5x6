@@ -7,6 +7,6 @@ public:
     Torre();
     virtual ~Torre();
 
-    virtual void dibujaIndividual() const;
+    virtual void dibuja() const override;
     bool mueve();
 };

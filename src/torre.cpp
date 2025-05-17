@@ -10,7 +10,7 @@ bool Torre::mueve() {
     return true;
 }
 
-void Torre::dibujaIndividual() const {
+void Torre::dibuja() const {
     glPushMatrix();
     glTranslatef(posicion.x, 0.4f, posicion.z);
     glColor4ub(color.r, color.g, color.b, color.a);

@@ -32,7 +32,7 @@
     <ClCompile Include="src\reina.cpp" />
     <ClCompile Include="src\rey.cpp" />
     <ClCompile Include="src\reglas.cpp" />
-    <ClCompile Include="src\tablero.cpp" />
+    <ClCompile Include="src\plataforma.cpp" />
     <ClCompile Include="src\torre.cpp" />
     <ClCompile Include="src\vector2D.cpp" />
   </ItemGroup>
@@ -49,7 +49,7 @@
     <ClInclude Include="src\reina.h" />
     <ClInclude Include="src\rey.h" />
     <ClInclude Include="src\reglas.h" />
-    <ClInclude Include="src\tablero.h" />
+    <ClInclude Include="src\plataforma.h" />
     <ClInclude Include="src\torre.h" />
     <ClInclude Include="src\vector2D.h" />
   </ItemGroup>

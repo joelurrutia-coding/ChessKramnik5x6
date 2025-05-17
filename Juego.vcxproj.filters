@@ -21,7 +21,7 @@
     <ClCompile Include="src\juego.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="src\tablero.cpp">
+    <ClCompile Include="src\plataforma.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="src\vector2D.cpp">
@@ -68,7 +68,7 @@
     <ClInclude Include="src\mundo.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="src\tablero.h">
+    <ClInclude Include="src\plataforma.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="src\vector2D.h">

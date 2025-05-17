@@ -10,7 +10,7 @@ bool Rey::mueve() {
     return true;
 }
 
-void Rey::dibujaIndividual() const {
+void Rey::dibuja() const {
     glPushMatrix();
     glTranslatef(posicion.x, 0.4f, posicion.z);
     glColor4ub(color.r, color.g, color.b, color.a);

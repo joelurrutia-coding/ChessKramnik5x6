@@ -7,6 +7,6 @@ public:
     Alfil();
     virtual ~Alfil();
 
-    virtual void dibujaIndividual() const;
+    virtual void dibuja() const override;
     bool mueve();
 };

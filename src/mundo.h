@@ -1,4 +1,4 @@
-#include "tablero.h"
+#include "plataforma.h"
 #include "pieza.h"  
 #include "menu.h"
 #include "computador.h" 
@@ -12,7 +12,7 @@ enum Pantalla {
 class Mundo
 {
 public:
-    Tablero platform;   
+    Plataforma platform;   
     Pieza piezas;       
     Menu menu;          
     Computador computer;

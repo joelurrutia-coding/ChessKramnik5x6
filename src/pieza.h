@@ -2,11 +2,11 @@
 
 #include "vector2D.h"
 #include "color.h"
-#include "tablero.h"    
+#include "plataforma.h"    
 #include <array>
 #include <string>
 #include <memory>
-#include <cmath>
+#include <math.h>
 
 GLUquadric* getSharedQuadric();
 
@@ -29,17 +29,17 @@ public: // Miembros accesibles desde cualquier parte en la que se añade la clase
         posicion.x = ix;
         posicion.z = iz;
     }
-    virtual void dibujaIndividual() const {}
+    virtual void dibuja() const {}
 
     std::array<std::array<int, 6>, 5>& getBoard();
     vector2D getSeleccion() const;
     void deseleccionar();
-    void seleccionar(int ix, int iz, int turnFlag, Tablero& platform);
+    void seleccionar(int ix, int iz, int turnFlag, Plataforma& platform);
 
     void guardarTablero(const std::string& filename, bool turnFlag);
     void cargarTablero(const std::string& filename, bool& turnFlag);
     void setMode(bool omod);
 
-    Pieza* createPiece(int pieceValue) const;
-    void dibuja() const;
+    Pieza* crear(int pieceValue) const;
+    void dibujaTablero() const;
 };

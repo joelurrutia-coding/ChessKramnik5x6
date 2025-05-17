@@ -5,7 +5,7 @@
 #include "freeglut.h"
 #include "vector2D.h"
 #include <vector>
-#include "tablero.h"
+#include "plataforma.h"
 
 Reglas::Reglas() {};
 
@@ -35,7 +35,7 @@ bool Reglas::moveChecker(int piece, vector2D origen, vector2D destino, std::arra
         if (!valid || !(dx || dz)) return false;
         int step_x = (dx > 0) - (dx < 0);
         int step_z = (dz > 0) - (dz < 0);
-        for (int ox = origen.x + step_x, oz = origen.z + step_z;
+        for (int ox = static_cast<int>(origen.x + step_x), oz = static_cast<int>(origen.z + step_z);
             ox != destino.x || oz != destino.z;
             ox += step_x, oz += step_z)
             if (board[ox][oz] != 0)

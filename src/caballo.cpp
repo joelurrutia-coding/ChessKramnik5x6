@@ -10,7 +10,7 @@ bool Caballo::mueve() {
     return true;
 }
 
-void Caballo::dibujaIndividual() const {
+void Caballo::dibuja() const {
     glPushMatrix();
     glTranslatef(posicion.x, 0.4f, posicion.z);
     glColor4ub(color.r, color.g, color.b, color.a);

@@ -7,6 +7,6 @@ public:
     Reina();
     virtual ~Reina();
 
-    virtual void dibujaIndividual() const;
+    virtual void dibuja() const override;
     bool mueve();
 };

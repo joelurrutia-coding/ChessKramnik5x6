@@ -9,7 +9,7 @@ Peon::~Peon() {}
 bool Peon::mueve() {
     return true;
 }
-void Peon::dibujaIndividual() const {
+void Peon::dibuja() const {
     glPushMatrix();
     glTranslatef(posicion.x, 0.4f, posicion.z);
     glColor4ub(color.r, color.g, color.b, color.a);

@@ -1,6 +1,6 @@
 #include <array>
 #include "vector2D.h"
-#include "tablero.h"
+#include "plataforma.h"
 
 class Reglas {
 public:

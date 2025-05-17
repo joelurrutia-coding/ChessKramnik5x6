@@ -34,7 +34,7 @@ vector2D Pieza::getSeleccion() const {
 void Pieza::deseleccionar() {
     seleccion = vector2D(-1, -1);
 }
-void Pieza::seleccionar(int ix, int iz, int turnFlag, Tablero& platform) {
+void Pieza::seleccionar(int ix, int iz, int turnFlag, Plataforma& platform) {
     int val = board[ix][iz];
     if (val == 0)
         return;
@@ -100,10 +100,10 @@ void Pieza::setMode(bool omod) {
     }
     deseleccionar();
 }
-Pieza* Pieza::createPiece(int pieceValue) const {
+Pieza* Pieza::crear(int pieceValue) const {
     if (pieceValue == 0)
         return nullptr;
-    int type = std::abs(pieceValue);
+    int type = abs(pieceValue);
     Pieza* piece = nullptr;
     switch (type) {
     case 1:
@@ -135,31 +135,31 @@ Pieza* Pieza::createPiece(int pieceValue) const {
     }
     return piece;
 }
-void Pieza::dibuja() const {
-    for (int x = 0; x < 5; ++x) {
-        for (int z = 0; z < 6; ++z) {
-            int value = board[x][z];
+void Pieza::dibujaTablero() const {
+    for (int i = 0; i < 5; ++i) {
+        for (int j = 0; j < 6; ++j) {
+            int value = board[i][j];
             if (value == 0)
                 continue;
             // Coronazion del peon
-            if (value == 1 && z == 5) {
+            if (value == 1 && j == 5) {
 				value = 5; // Reina
-                const_cast<std::array<std::array<int, 6>, 5>&>(board)[x][z] = value;
+                const_cast<std::array<std::array<int, 6>, 5>&>(board)[i][j] = value;
 			}
-			else if (value == -1 && z == 0) {
+			else if (value == -1 && j == 0) {
 				value = -5; // Reina
-                const_cast<std::array<std::array<int, 6>, 5>&>(board)[x][z] = value;
+                const_cast<std::array<std::array<int, 6>, 5>&>(board)[i][j] = value;
             }
-            Pieza* piece = createPiece(value);
+            Pieza* piece = crear(value);
             if (!piece)
                 continue;
-            piece->setPosicion(x + 1, z + 1);
-            if (x == static_cast<int>(seleccion.x) && z == static_cast<int>(seleccion.z)) {
+            piece->setPosicion(static_cast<float>(i + 1), static_cast<float>(j + 1));
+            if (i == static_cast<int>(seleccion.x) && j == static_cast<int>(seleccion.z)) {
                 Color c = piece->color;
                 c.a = 150;
                 piece->setColor(c);
             }
-            piece->dibujaIndividual();
+            piece->dibuja();
             delete piece;
         }
     }

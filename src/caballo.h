@@ -7,6 +7,6 @@ public:
     Caballo();
     virtual ~Caballo();
 
-    virtual void dibujaIndividual() const;
+    virtual void dibuja() const override;
     bool mueve();
 };

@@ -60,7 +60,7 @@ bool Computador::makeMove(bool turnFlag, bool autopilotFlag, std::array<std::arr
                     std::array<std::array<int, 6>, 5> boardCopy = board;
                     boardCopy[destX][destZ] = origVal;
                     boardCopy[x][z] = 0;
-                    Tablero platformCopy;
+                    Plataforma platformCopy;
 
                     // Verificar que el movimiento no deje al rey en jaque
                     if (Reglas::jaque(!turnFlag, boardCopy, platformCopy.getTiles()))
@@ -140,11 +140,11 @@ bool Computador::makeMoveKingSafe(bool turnFlag, bool autopilotFlag, std::array<
                     if (!Reglas::moveChecker(origVal, origPos, destPos, board))
                         continue;
 
-                    // Simular el movimiento en una copia del tablero y crear un objeto temporal Tablero.
+                    // Simular el movimiento en una copia del tablero y crear un objeto temporal.
                     std::array<std::array<int, 6>, 5> boardCopy = board;
                     boardCopy[destX][destZ] = origVal;
                     boardCopy[x][z] = 0;
-                    Tablero platformCopy;
+                    Plataforma platformCopy;
 
                     // Verificar que el movimiento no deje al rey en jaque.
                     if (Reglas::jaque(!turnFlag, boardCopy, platformCopy.getTiles()))

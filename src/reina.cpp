@@ -10,7 +10,7 @@ bool Reina::mueve() {
     return true;
 }
 
-void Reina::dibujaIndividual() const {
+void Reina::dibuja() const {
     glPushMatrix();
     glTranslatef(posicion.x, 0.4f, posicion.z);
     glColor4ub(color.r, color.g, color.b, color.a);
