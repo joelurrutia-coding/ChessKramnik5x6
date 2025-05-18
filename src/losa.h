@@ -13,7 +13,7 @@ public:
 	Losa();
 	virtual~Losa();
 
-	void setColor(const Color& c);
-	void setPosicion(float ix, float iz);
+	inline void setColor(const Color& c) { color = c; }
+	inline void setPosicion(float ix, float iz) { posicion = { ix, iz }; }
 	void dibuja() const;
 };

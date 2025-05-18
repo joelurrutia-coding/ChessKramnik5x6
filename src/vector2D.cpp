@@ -14,13 +14,10 @@ float vector2D::argumento() const{
 }
 vector2D vector2D::operator + (vector2D v) {
 	return { x + v.x, z + v.z };
-	/*
-	vector2D res;
-	res.x = x + v.x;
-	res.z = z + v.z;
-	return res;
-	*/
 }
 vector2D vector2D::operator - (vector2D v){
 	return { x - v.x, z - v.z };
+}
+bool vector2D::operator==(const vector2D& other) const {
+	return (x == other.x && z == other.z);
 }

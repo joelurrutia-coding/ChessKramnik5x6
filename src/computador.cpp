@@ -223,16 +223,16 @@ bool Computador::makeMoveKingSafe(bool turnFlag, bool autopilotFlag, std::array<
         return false;
     }
 }
-void Computador::imprimirComputerMov(int pieceVal, vector2D origen, vector2D destino, std::array<std::array<int, 6>, 5>& board) const {
+void Computador::imprimirComputerMov(int value, vector2D origen, vector2D destino, std::array<std::array<int, 6>, 5>& board) const {
     if (origen.x != -1 && origen.z != -1 &&
         destino.x != -1 && destino.z != -1) {
         // ACTUALIZAMOS MOVIMIENTO DEL COMPUTADOR
         board[(int)destino.x][(int)destino.z] = board[(int)origen.x][(int)origen.z];
         board[(int)origen.x][(int)origen.z] = 0;
 
-        int piece = abs(pieceVal);
+        int pc = abs(value);
         char abrev = '?';
-        switch (piece) {
+        switch (pc) {
         case 1: abrev = 'P'; break; // Peón
         case 2: abrev = 'R'; break; // Torre
         case 3: abrev = 'H'; break; // Caballo

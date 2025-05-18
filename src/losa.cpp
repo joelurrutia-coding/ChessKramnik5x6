@@ -6,12 +6,6 @@ Losa::Losa():
 {}
 Losa::~Losa() {}
 
-void Losa::setColor(const Color& c) {
-    color = c;
-}
-void Losa::setPosicion(float ix, float iz) {
-    posicion = {ix, iz};
-}
 void Losa::dibuja() const {
     glPushMatrix();
     glColor4ub(color.r, color.g, color.b, color.a); 

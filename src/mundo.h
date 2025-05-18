@@ -28,6 +28,7 @@ public:
     void modoVSmaquina();
     void dibuja();
     void tecla(unsigned char key);
+
     void leftClick(int mouseX, int mouseY);
     void rightClick(int mouseX, int mouseY);
     void imprimirMov(int piece, vector2D origen, vector2D destino) const;

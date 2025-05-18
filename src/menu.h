@@ -12,9 +12,10 @@ class Menu {
 public:
     Menu(MenuScreen screen = MENU_INICIO);
 
-    void dibuja();
     void setScreen(MenuScreen screen);
     void setWinner(const std::string& winner);
+    void dibuja();
+
     void setScores();
     void guardarScores(int whiteScore, int blackScore);
     void cargarScores(int& whiteScore, int& blackScore);

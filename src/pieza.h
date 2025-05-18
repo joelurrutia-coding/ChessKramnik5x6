@@ -24,22 +24,19 @@ public: // Miembros accesibles desde cualquier parte en la que se añade la clase
     Pieza();
     virtual ~Pieza();
 
+    Pieza* crear(int pieceValue) const;
     inline void setColor(const Color& c) { color = c; }
-    inline void setPosicion(float ix, float iz) {
-        posicion.x = ix;
-        posicion.z = iz;
-    }
+    inline void setPosicion(float ix, float iz) { posicion = { ix, iz }; }
     virtual void dibuja() const {}
 
-    std::array<std::array<int, 6>, 5>& getBoard();
-    vector2D getSeleccion() const;
-    void deseleccionar();
-    void seleccionar(int ix, int iz, int turnFlag, Plataforma& platform);
+    inline std::array<std::array<int, 6>, 5>& getBoard() { return board; }
+    inline vector2D getSeleccion() const { return seleccion; }
 
+    void seleccionar(int ix, int iz, int turnFlag, Plataforma& platform);
+    void deseleccionar();
+
+    void setMode(bool omod);
     void guardarTablero(const std::string& filename, bool turnFlag);
     void cargarTablero(const std::string& filename, bool& turnFlag);
-    void setMode(bool omod);
-
-    Pieza* crear(int pieceValue) const;
-    void dibujaTablero() const;
+    void dibujarTablero() const;
 };

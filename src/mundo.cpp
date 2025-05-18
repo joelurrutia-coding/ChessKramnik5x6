@@ -99,7 +99,7 @@ void Mundo::dibuja() {
         glPopMatrix();
 
         platform.dibuja();
-        piezas.dibujaTablero();
+        piezas.dibujarTablero();
         break;
     case GAME_OVER:
         menu.setScreen(MENU_FINAL);
@@ -237,14 +237,15 @@ void Mundo::rightClick(int mouseX, int mouseY) {
     if (destino.x >= 0 && destino.x < 5 && destino.z >= 0 && destino.z < 6) {
         vector2D seleccion = piezas.getSeleccion();
         if (seleccion.x != -1 && seleccion.z != -1) {
-            int piece = piezas.getBoard()[static_cast<int>(seleccion.x)][static_cast<int>(seleccion.z)];
-            if ((turnFlag == 0 && piece > 0) || (turnFlag == 1 && piece < 0)) {
+            int value = piezas.getBoard()[static_cast<int>(seleccion.x)][static_cast<int>(seleccion.z)];
+            if ((turnFlag == 0 && value > 0) || (turnFlag == 1 && value < 0)) {
                 if ((seleccion.z == destino.z && seleccion.x == destino.x) ||
-                    !Reglas::moveChecker(piece, seleccion, destino, piezas.getBoard()))
+                    !Reglas::moveChecker(value, seleccion, destino, piezas.getBoard()))
                     return;
-                piezas.getBoard()[static_cast<int>(destino.x)][static_cast<int>(destino.z)] = piece;
+
+                piezas.getBoard()[static_cast<int>(destino.x)][static_cast<int>(destino.z)] = value;
                 piezas.getBoard()[static_cast<int>(seleccion.x)][static_cast<int>(seleccion.z)] = 0;
-                imprimirMov(piece, seleccion, destino);
+                imprimirMov(value, seleccion, destino);
 
                 piezas.deseleccionar();
                 platform.resetTileColors();
@@ -277,13 +278,17 @@ void Mundo::rightClick(int mouseX, int mouseY) {
                     if (openingFlag) {
                         computer.makeMoveOpening(openingFlag, turnFlag, autopilotFlag, piezas.getBoard());
                         openingFlag = false;
+                        platform.resetTileColors();
+                        //std::cout << "makeMoveOpening\n";
                     }
                     else if (jaqueFlag) {
                         endFlag = !computer.makeMoveKingSafe(turnFlag, autopilotFlag, piezas.getBoard());
+                        platform.resetTileColors();
                         //std::cout << "makeMoveSafeKing\n";
                     }
                     else if (!jaqueFlag) {
                         endFlag = !computer.makeMove(turnFlag, autopilotFlag, piezas.getBoard());
+                        platform.resetTileColors();
                         //std::cout << "makeMove\n";
                     }
                     turnFlag = !turnFlag;
@@ -317,10 +322,10 @@ void Mundo::rightClick(int mouseX, int mouseY) {
         return;
     }
 }
-void Mundo::imprimirMov(int piece, vector2D origen, vector2D destino) const {
+void Mundo::imprimirMov(int value, vector2D origen, vector2D destino) const {
     char turno = (turnFlag == 0) ? 'w' : 'b';
     char abrev = '?';
-    switch (abs(piece)) {
+    switch (abs(value)) {
     case 1: abrev = 'P'; break; // Peón
     case 2: abrev = 'R'; break; // Torre
     case 3: abrev = 'H'; break; // Caballo

@@ -16,7 +16,7 @@ public:
 	Plataforma();
 	virtual ~Plataforma();
 
-	std::array<std::array<Losa, 6>, 5>& getTiles();
+	inline std::array<std::array<Losa, 6>, 5>& getTiles() { return tiles; };
 	void dibuja() const;
 	void resetTileColors();
 };

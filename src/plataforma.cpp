@@ -74,9 +74,7 @@ void Plataforma::dibuja() const {
         }
     }
 }
-std::array<std::array<Losa, 6>, 5>& Plataforma::getTiles() {
-	return tiles;
-}
+
 void Plataforma::resetTileColors() {
 	for (int j = 0; j < 6; ++j) {
 		for (int i = 0; i < 5; ++i) {
