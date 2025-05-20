@@ -12,9 +12,8 @@ Pantalla currentScreen = START;
 Mundo::Mundo() :
     x_ojo(3.0f), y_ojo(4.9f), z_ojo(-1.0f),
     angle(-1.5707963268f), targetAngle(angle),
-    modeFlag(false), turnFlag(false), clickFlag(true), rotationFlag(false), 
-    modelviewFlag(true), fullscrnFlag(false), 
-    endFlag(false), jaqueFlag(false), autopilotFlag(false), openingFlag(true)
+    clickFlag(true), rotationFlag(false), modelviewFlag(true), fullscrnFlag(false), autopilotFlag(false),
+    modeFlag(false), turnFlag(false), openingFlag(true), endFlag(false), jaqueFlag(false), blackCastlingF(true), whiteCastlingF(true)
 {}
 void Mundo::rotarOjo() {
     if (!rotationFlag)
@@ -78,6 +77,8 @@ void Mundo::inicializa() {
     piezas.setMode(modeFlag);
     endFlag = false;
     openingFlag = true;
+    blackCastlingF = true;
+    whiteCastlingF = true;
     cambiarOjo();
 }
 void Mundo::dibuja() {
@@ -212,6 +213,9 @@ void Mundo::leftClick(int mouseX, int mouseY) {
 
     if (boardX >= 0 && boardX < 5 && boardZ >= 0 && boardZ < 6 && clickFlag) {
         piezas.seleccionar(boardX, boardZ, turnFlag, platform);
+        bool castling = (turnFlag ? blackCastlingF : whiteCastlingF);
+        int pc = piezas.getBoard()[boardX][boardZ];
+        if (castling && abs(pc) == 6) Reglas::displayCastling(pc, { static_cast<float>(boardX), static_cast<float>(boardZ) }, piezas.getBoard(), platform.getTiles());
     }
 }
 void Mundo::rightClick(int mouseX, int mouseY) {
@@ -239,12 +243,21 @@ void Mundo::rightClick(int mouseX, int mouseY) {
         if (seleccion.x != -1 && seleccion.z != -1) {
             int value = piezas.getBoard()[static_cast<int>(seleccion.x)][static_cast<int>(seleccion.z)];
             if ((turnFlag == 0 && value > 0) || (turnFlag == 1 && value < 0)) {
-                if ((seleccion.z == destino.z && seleccion.x == destino.x) ||
-                    !Reglas::moveChecker(value, seleccion, destino, piezas.getBoard()))
+
+                if (seleccion.z == destino.z && seleccion.x == destino.x)
+                    return;
+                else if (((turnFlag && blackCastlingF) || (!turnFlag && whiteCastlingF)) && Reglas::enroqueChecker(turnFlag, seleccion, destino, piezas.getBoard())) {
+                    Reglas::enroqueMove(turnFlag, seleccion, destino, piezas.getBoard());
+                    if (turnFlag)
+                        blackCastlingF = false;
+                    else
+                        whiteCastlingF = false;
+                }
+                else if (!Reglas::moveChecker(value, seleccion, destino, piezas.getBoard()))
                     return;
 
-                piezas.getBoard()[static_cast<int>(destino.x)][static_cast<int>(destino.z)] = value;
                 piezas.getBoard()[static_cast<int>(seleccion.x)][static_cast<int>(seleccion.z)] = 0;
+                piezas.getBoard()[static_cast<int>(destino.x)][static_cast<int>(destino.z)] = value;
                 imprimirMov(value, seleccion, destino);
 
                 piezas.deseleccionar();

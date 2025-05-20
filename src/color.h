@@ -29,3 +29,4 @@ const Color btile = { 5, 20, 40, 250 };
 const Color valid = { 100, 250, 0, 250 };
 const Color danger = { 250, 100, 0, 250 };
 const Color dangerous = { 250, 250, 0, 250 };
+const Color enroque = { 250, 0, 250, 250 };

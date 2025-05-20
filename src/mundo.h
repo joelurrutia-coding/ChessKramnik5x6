@@ -18,7 +18,8 @@ public:
     Computador computer;
 
     float x_ojo, y_ojo, z_ojo, angle, targetAngle;
-    bool modeFlag, turnFlag, clickFlag, rotationFlag, endFlag, modelviewFlag, fullscrnFlag, autopilotFlag, jaqueFlag, openingFlag;
+    bool clickFlag, rotationFlag, fullscrnFlag, modelviewFlag, autopilotFlag,
+         modeFlag, turnFlag, openingFlag, endFlag, jaqueFlag, blackCastlingF, whiteCastlingF;
 
     Mundo();
 

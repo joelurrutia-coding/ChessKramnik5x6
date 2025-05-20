@@ -12,8 +12,7 @@ Computador::Computador():
 {}
 Computador::~Computador() {}
 
-void Computador::makeMoveOpening(bool openingFlag, bool turnFlag, bool autopilotFlag, std::array<std::array<int, 6>, 5>& board)
-{
+void Computador::makeMoveOpening(bool openingFlag, bool turnFlag, bool autopilotFlag, std::array<std::array<int, 6>, 5>& board) {
     if (!openingFlag || !turnFlag || !autopilotFlag)
         return;
     // RANDOM DE 0 A 6
@@ -34,9 +33,9 @@ bool Computador::makeMove(bool turnFlag, bool autopilotFlag, std::array<std::arr
     if (autopilotFlag != 1 || turnFlag != 1)
         return false;
 
-    vector2D kingPos = Reglas::kingFinder(1, board);
+    vector2D kingPos = Reglas::pieceFinder(-6, board);
     if (kingPos.x == -1) {
-        std::cout << "Rey negro no encontrado\n";
+        //std::cout << "Rey negro no encontrado\n";
         return false;
     }
     bool foundMove = false;
@@ -94,7 +93,7 @@ bool Computador::makeMove(bool turnFlag, bool autopilotFlag, std::array<std::arr
         return true;
     }
     else {
-        std::cout << "Computadora no encontró movimiento válido.\n";
+        //std::cout << "Computadora no encontró movimiento válido.\n";
         return false;
     }
 }
@@ -103,9 +102,9 @@ bool Computador::makeMoveKingSafe(bool turnFlag, bool autopilotFlag, std::array<
         return false;
 
     // Ubicar al rey negro en el tablero original.
-    vector2D kingPos = Reglas::kingFinder(1, board);
+    vector2D kingPos = Reglas::pieceFinder(-6, board);
     if (kingPos.x == -1) {
-        std::cout << "Rey negro no encontrado\n";
+        //std::cout << "Rey negro no encontrado\n";
         return false;
     }
     // Variables de candidato para cada opción (sin usar struct extra).
@@ -116,7 +115,7 @@ bool Computador::makeMoveKingSafe(bool turnFlag, bool autopilotFlag, std::array<
     int bestCaptureDestVal = -10;      // Mayor valor capturado mejor, de -5 a +6.
 
     vector2D bestKingOrigPos, bestKingDestPos;   
-    int bestKingOrigVal = -6;        // Movemos el rey negro (-6).
+    //int bestKingOrigVal = -6;        // Movemos el rey negro (-6).
     int bestKingDestVal = -10;         // Peor caso comer a la reina negra (-5), mejor caso comer al rey negro (+6).
 
     vector2D bestBlockOrigPos, bestBlockDestPos;
@@ -164,18 +163,7 @@ bool Computador::makeMoveKingSafe(bool turnFlag, bool autopilotFlag, std::array<
                             //std::cout << "Capturar\n";
                         }
                     }
-                    // Opción B: Mover el rey para esquivar el jaque.
-                    if (origVal == -6 && destVal > bestKingDestVal) {
-                        if (!foundKing || (destVal > bestKingDestVal) || (destVal == bestKingDestVal)) {
-                            bestKingOrigPos = origPos;
-                            bestKingOrigVal = -6;
-                            bestKingDestPos = destPos;
-                            bestKingDestVal = destVal;  
-                            foundKing = true;
-                            //std::cout << "Esquivar\n";
-                        }
-                    }
-                    // Opción C: Bloquear la línea de ataque (si no es rey ni caballo)
+                    // Opción B: Bloquear la línea de ataque (si no es rey ni caballo)
                     if (origVal != -6 && origVal != -3 && destVal > bestBlockDestVal) { // destVal == 0
                         if (destX == static_cast<int>(kingPos.x) || destZ == static_cast<int>(kingPos.z) ||
                             (abs(destX - static_cast<int>(kingPos.x)) == abs(destZ - static_cast<int>(kingPos.z)))) {
@@ -187,6 +175,17 @@ bool Computador::makeMoveKingSafe(bool turnFlag, bool autopilotFlag, std::array<
                                 foundBlock = true;
                                 //std::cout << "Bloqueo\n";
                             }
+                        }
+                    }
+                    // Opción C: Mover el rey para esquivar el jaque.
+                    if (origVal == -6 && destVal > bestKingDestVal) {
+                        if (!foundKing || (destVal > bestKingDestVal) || (destVal == bestKingDestVal)) {
+                            bestKingOrigPos = origPos;
+                            //bestKingOrigVal = -6;
+                            bestKingDestPos = destPos;
+                            bestKingDestVal = destVal;  
+                            foundKing = true;
+                            //std::cout << "Esquivar\n";
                         }
                     }
                 }
@@ -202,14 +201,6 @@ bool Computador::makeMoveKingSafe(bool turnFlag, bool autopilotFlag, std::array<
         imprimirComputerMov(movOrigVal, movOrigPos, movDestPos, board);
         return true;
     }
-    else if (foundKing) {
-        movOrigPos = bestKingOrigPos;
-        movOrigVal = -6;
-        movDestPos = bestKingDestPos;
-        movDestVal = bestKingDestVal;
-        imprimirComputerMov(movOrigVal, movOrigPos, movDestPos, board);
-        return true;
-    }
     else if (foundBlock) {
         movOrigPos = bestBlockOrigPos;
         movOrigVal = bestBlockOrigVal;
@@ -218,8 +209,16 @@ bool Computador::makeMoveKingSafe(bool turnFlag, bool autopilotFlag, std::array<
         imprimirComputerMov(movOrigVal, movOrigPos, movDestPos, board);
         return true;
     }
+    else if (foundKing) {
+        movOrigPos = bestKingOrigPos;
+        movOrigVal = -6;
+        movDestPos = bestKingDestPos;
+        movDestVal = bestKingDestVal;
+        imprimirComputerMov(movOrigVal, movOrigPos, movDestPos, board);
+        return true;
+    }
     else {
-        std::cout << "Computadora no encontro movimiento seguro para el rey.\n";
+        //std::cout << "Computadora no encontro movimiento seguro para el rey.\n";
         return false;
     }
 }
@@ -227,8 +226,8 @@ void Computador::imprimirComputerMov(int value, vector2D origen, vector2D destin
     if (origen.x != -1 && origen.z != -1 &&
         destino.x != -1 && destino.z != -1) {
         // ACTUALIZAMOS MOVIMIENTO DEL COMPUTADOR
-        board[(int)destino.x][(int)destino.z] = board[(int)origen.x][(int)origen.z];
-        board[(int)origen.x][(int)origen.z] = 0;
+        board[static_cast<int>(destino.x)][static_cast<int>(destino.z)] = board[static_cast<int>(origen.x)][static_cast<int>(origen.z)];
+        board[static_cast<int>(origen.x)][static_cast<int>(origen.z)] = 0;
 
         int pc = abs(value);
         char abrev = '?';

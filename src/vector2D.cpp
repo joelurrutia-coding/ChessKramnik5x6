@@ -7,10 +7,10 @@ vector2D::vector2D(float xi, float zi){
 vector2D::~vector2D() {}
 
 float vector2D::modulo() const{
-	return (float)sqrt(x * x + z * z);
+	return static_cast<float>(sqrt(x * x + z * z));
 }
 float vector2D::argumento() const{
-	return (float)atan2(x, z);
+	return static_cast<float>(atan2(x, z));
 }
 vector2D vector2D::operator + (vector2D v) {
 	return { x + v.x, z + v.z };

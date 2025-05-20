@@ -67,7 +67,7 @@ void Pieza::seleccionar(int ix, int iz, int turnFlag, Plataforma& platform) {
         return;
     if ((turnFlag == 0 && pc < 0) || (turnFlag == 1 && pc > 0))
         return;
-    seleccion = vector2D(static_cast<float>(ix), static_cast<float>(iz));
+    seleccion = vector2D(ix, iz);
     platform.resetTileColors();
     Reglas::displayValidMoves(pc, seleccion, board, platform.getTiles());
 }
@@ -105,7 +105,7 @@ void Pieza::guardarTablero(const std::string& filename, bool turnFlag) {
     deseleccionar();
     std::ofstream file(filename);
     if (!file) {
-        std::cerr << "Error. No se pudo guardar el tablero.\n";
+        //std::cerr << "Error. No se pudo guardar el tablero.\n";
         return;
     }
     for (int z = 0; z < 6; ++z) {
@@ -115,12 +115,12 @@ void Pieza::guardarTablero(const std::string& filename, bool turnFlag) {
         file << '\n';
     }
     file << turnFlag << '\n';
-    std::cout << "Ultimo tablero guardado exitosamente.\n";
+    //std::cout << "Ultimo tablero guardado exitosamente.\n";
 }
 void Pieza::cargarTablero(const std::string& filename, bool& turnFlag) {
     std::ifstream file(filename);
     if (!file) {
-        std::cerr << "Error. No se pudo cargar el ultimo tablero guardado.\n";
+        //std::cerr << "Error. No se pudo cargar el ultimo tablero guardado.\n";
         return;
     }
     for (int z = 0; z < 6; ++z) {
@@ -129,7 +129,7 @@ void Pieza::cargarTablero(const std::string& filename, bool& turnFlag) {
         }
     }
     file >> turnFlag;
-    std::cout << "Ultimo tablero guardado cargado exitosamente\n";
+   // std::cout << "Ultimo tablero guardado cargado exitosamente\n";
 }
 void Pieza::dibujarTablero() const {
     for (int i = 0; i < 5; ++i) {
@@ -149,7 +149,7 @@ void Pieza::dibujarTablero() const {
             Pieza* piece = crear(value);
             if (!piece)
                 continue;
-            piece->setPosicion(static_cast<float>(i + 1), static_cast<float>(j + 1));
+            piece->setPosicion((i + 1), (j + 1));
             if (i == static_cast<int>(seleccion.x) && j == static_cast<int>(seleccion.z)) {
                 Color c = piece->color;
                 c.a = 150;
