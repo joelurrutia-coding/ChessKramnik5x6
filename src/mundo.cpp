@@ -10,10 +10,16 @@
 Pantalla currentScreen = START;
 
 Mundo::Mundo() :
+    // CAMARA
     x_ojo(3.0f), y_ojo(4.9f), z_ojo(-1.0f),
+    // ROTACION
     angle(-1.5707963268f), targetAngle(angle),
-    clickFlag(true), rotationFlag(false), modelviewFlag(true), fullscrnFlag(false), autopilotFlag(false),
-    modeFlag(false), turnFlag(false), openingFlag(true), endFlag(false), jaqueFlag(false), blackCastlingF(true), whiteCastlingF(true)
+    // FLAGS DE INTERFAZ GRAFICA
+    clickFlag(true), rotationFlag(false), modelviewFlag(true), fullscrnFlag(false),  
+    // FLAGS DE INTERFAZ DE JUEGO
+    turnFlag(false), jaqueFlag(false), modeFlag(false), autopilotFlag(false),
+    // ONE-TIME-USE FLAGS (POR PARTIDA) 
+    openingFlag(true), endFlag(false), blackCastlingF(true), whiteCastlingF(true)
 {}
 void Mundo::rotarOjo() {
     if (!rotationFlag)
@@ -62,23 +68,19 @@ void Mundo::cambiarOjo() {
 }
 void Mundo::modoVSmaquina() {
     autopilotFlag = !autopilotFlag;
-    std::cout << (autopilotFlag ? "Humano VS Maquina (Seleccionado)\n" : "Humano VS Humano (Seleccionado)\n");
+    //std::cout << (autopilotFlag ? "Humano VS Maquina (Seleccionado)\n" : "Humano VS Humano (Seleccionado)\n");
 }
 void Mundo::inicializa() {
+    std::system("cls");
     x_ojo = 3.0f;
     y_ojo = 4.9f;
     z_ojo = -1.0f;
     angle = -1.5707963268f;
-    turnFlag = false;
-    clickFlag = true;
-    rotationFlag = false;
+    turnFlag = rotationFlag = endFlag = false;
+    clickFlag = openingFlag = blackCastlingF = whiteCastlingF = true;
     piezas.deseleccionar();
     platform.resetTileColors();
     piezas.setMode(modeFlag);
-    endFlag = false;
-    openingFlag = true;
-    blackCastlingF = true;
-    whiteCastlingF = true;
     cambiarOjo();
 }
 void Mundo::dibuja() {
@@ -91,7 +93,6 @@ void Mundo::dibuja() {
         gluLookAt(x_ojo, y_ojo, z_ojo,  // POSICION DEL OJO
                   3.0f, -1.0f, 3.5f,    // DONDE MIRA EL OJO
                   0.0f, 1.0f, 0.0f);    // VECTOR HACIA ARRIBA (+Y)
-   
         glPushMatrix();
         glTranslatef(3.0f, 0.2f, 3.5f);
         glColor4ub(255, 255, 255, 255);
@@ -190,54 +191,54 @@ void Mundo::tecla(unsigned char key) {
     }
     glutPostRedisplay();
 }
-void Mundo::leftClick(int mouseX, int mouseY) {
+void Mundo::leftClick(int mouse_x, int mouse_y) {
     GLint viewport[4];               // X, Y, ANCHO, ALTURA DE LA PANTALLA
     GLdouble modelview[16];          // 4x4 CAMARA + MODELO DE VISTA
     GLdouble projection[16];         // 4x4 MATRIZ DE PROYECCION
-    GLfloat depthZ = 0;                  // PROFUNDIDAD DEL CLICK EN 3D
-    GLdouble worldX, worldY, worldZ; // COORDENADAS 3D DEL MUNDO EN PANTALLA
+    GLfloat depth_z = 0;                  // PROFUNDIDAD DEL CLICK EN 3D
+    GLdouble world_x, world_y, world_z; // COORDENADAS 3D DEL MUNDO EN PANTALLA
 
     glGetDoublev(GL_MODELVIEW_MATRIX, modelview);
     glGetDoublev(GL_PROJECTION_MATRIX, projection);
     glGetIntegerv(GL_VIEWPORT, viewport);
 
     // CONVERSION COORDENADAS DE PANTALLA (X,Y,Z) A TABLERO (X,Z) 
-    mouseY = viewport[3] - mouseY;
-    glReadPixels(mouseX, mouseY, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &depthZ);
-    gluUnProject(mouseX, mouseY, depthZ,
+    mouse_y = viewport[3] - mouse_y;
+    glReadPixels(mouse_x, mouse_y, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &depth_z);
+    gluUnProject(mouse_x, mouse_y, depth_z,
         modelview, projection, viewport,
-        &worldX, &worldY, &worldZ);
+        &world_x, &world_y, &world_z);
 
-    int boardX = static_cast<int>(worldX - 0.5f);
-    int boardZ = static_cast<int>(worldZ - 0.5f);
+    int board_x = static_cast<int>(world_x - 0.5f);
+    int board_z = static_cast<int>(world_z - 0.5f);
 
-    if (boardX >= 0 && boardX < 5 && boardZ >= 0 && boardZ < 6 && clickFlag) {
-        piezas.seleccionar(boardX, boardZ, turnFlag, platform);
+    if (board_x >= 0 && board_x < 5 && board_z >= 0 && board_z < 6 && clickFlag) {
+        piezas.seleccionar(board_x, board_z, turnFlag, platform);
         bool castling = (turnFlag ? blackCastlingF : whiteCastlingF);
-        int pc = piezas.getBoard()[boardX][boardZ];
-        if (castling && abs(pc) == 6) Reglas::displayCastling(pc, { static_cast<float>(boardX), static_cast<float>(boardZ) }, piezas.getBoard(), platform.getTiles());
+        int pc = piezas.getBoard()[board_x][board_z];
+        if (castling && abs(pc) == 6) Reglas::displayCastling(pc, { static_cast<float>(board_x), static_cast<float>(board_z) }, piezas.getBoard(), platform.getTiles());
     }
 }
-void Mundo::rightClick(int mouseX, int mouseY) {
+void Mundo::rightClick(int mouse_x, int mouse_y) {
     GLint viewport[4];
     GLdouble modelview[16], projection[16];
-    GLfloat depthZ = 0.0f;
-    GLdouble worldX, worldY, worldZ;
+    GLfloat depth_z = 0.0f;
+    GLdouble world_x, world_y, world_z;
 
     glGetDoublev(GL_MODELVIEW_MATRIX, modelview);
     glGetDoublev(GL_PROJECTION_MATRIX, projection);
     glGetIntegerv(GL_VIEWPORT, viewport);
 
-    mouseY = viewport[3] - mouseY;
-    glReadPixels(mouseX, mouseY, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &depthZ);
-    gluUnProject(mouseX, mouseY, depthZ,
+    mouse_y = viewport[3] - mouse_y;
+    glReadPixels(mouse_x, mouse_y, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &depth_z);
+    gluUnProject(mouse_x, mouse_y, depth_z,
         modelview, projection, viewport,
-        &worldX, &worldY, &worldZ);
+        &world_x, &world_y, &world_z);
 
-    int boardX = static_cast<int>(worldX - 0.5f);
-    int boardZ = static_cast<int>(worldZ - 0.5f);
+    int board_x = static_cast<int>(world_x - 0.5f);
+    int board_z = static_cast<int>(world_z - 0.5f);
 
-    vector2D destino = { static_cast<float>(boardX), static_cast<float>(boardZ) };
+    vector2D destino = { static_cast<float>(board_x), static_cast<float>(board_z) };
     if (destino.x >= 0 && destino.x < 5 && destino.z >= 0 && destino.z < 6) {
         vector2D seleccion = piezas.getSeleccion();
         if (seleccion.x != -1 && seleccion.z != -1) {
@@ -282,7 +283,7 @@ void Mundo::rightClick(int mouseX, int mouseY) {
 				}
                 else if (Reglas::jaque(!turnFlag, piezas.getBoard(), platform.getTiles())) {
                     jaqueFlag = true;
-                    std::cout << "Jaque!\n";
+                    //std::cout << "Jaque!\n";
                 }
                 else {
                     jaqueFlag = false;
@@ -317,7 +318,7 @@ void Mundo::rightClick(int mouseX, int mouseY) {
                         //std::cout << "JaqueMate!\n";
                     }
                     else if (Reglas::jaque(!turnFlag, piezas.getBoard(), platform.getTiles())) {
-                        std::cout << "Jaque!\n";
+                        //std::cout << "Jaque!\n";
                     }
                 }
             }
@@ -327,8 +328,8 @@ void Mundo::rightClick(int mouseX, int mouseY) {
     // COMPROBACION FIN DEL JUEGO.
     if (endFlag) {
         std::string winner = (turnFlag == 0) ? "BLANCO" : "NEGRO";
-        std::cout << "Jaque Mate!\n";
-        std::cout << "Ganador: " << winner << std::endl;
+        //std::cout << "Jaque Mate!\n";
+        //std::cout << "Ganador: " << winner << std::endl;
         menu.setWinner(winner);
 		menu.setScores();
         currentScreen = GAME_OVER;

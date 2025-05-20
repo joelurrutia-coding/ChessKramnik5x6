@@ -110,8 +110,7 @@ bool Reglas::jaque(bool turnFlag, std::array<std::array<int, 6>, 5>& board, std:
     }
     return false;
 }
-bool Reglas::jaqueMate(bool turnFlag, std::array<std::array<int, 6>, 5>& board, std::array<std::array<Losa, 6>, 5>& tiles)
-{
+bool Reglas::jaqueMate(bool turnFlag, std::array<std::array<int, 6>, 5>& board, std::array<std::array<Losa, 6>, 5>& tiles){
     int kingValue = (turnFlag ? 6 : -6);
     vector2D kingPos = pieceFinder(kingValue, board);
     if (kingPos.x == -1) return true;  // REY NO ENCONTRADO
