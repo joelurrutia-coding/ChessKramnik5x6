@@ -18,4 +18,6 @@ public:
     
     static bool jaque(bool turnFlag, std::array<std::array<int, 6>, 5>& board, std::array<std::array<Losa, 6>, 5>& tiles);
     static bool jaqueMate(bool turnFlag, std::array<std::array<int, 6>, 5>& board, std::array<std::array<Losa, 6>, 5>& tiles);
+
+    static void updateMov(int value, vector2D origen, vector2D destino, std::array<std::array<int, 6>, 5>& board);
 };

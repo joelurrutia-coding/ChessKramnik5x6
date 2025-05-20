@@ -176,13 +176,13 @@ void Mundo::tecla(unsigned char key) {
         }
         break;
     case GAME_OVER:
-        if (key == 'r' || key == 'R') {
+        if (key == 13) { // ENTER
             currentScreen = START;
             inicializa();
             glutPostRedisplay();
             return;
         }
-        if (key == 27) {
+        if (key == 27) { // ESC
             exit(0);
         }
         break;
@@ -192,10 +192,10 @@ void Mundo::tecla(unsigned char key) {
     glutPostRedisplay();
 }
 void Mundo::leftClick(int mouse_x, int mouse_y) {
-    GLint viewport[4];               // X, Y, ANCHO, ALTURA DE LA PANTALLA
-    GLdouble modelview[16];          // 4x4 CAMARA + MODELO DE VISTA
-    GLdouble projection[16];         // 4x4 MATRIZ DE PROYECCION
-    GLfloat depth_z = 0;                  // PROFUNDIDAD DEL CLICK EN 3D
+    GLint viewport[4];                  // X, Y, ANCHO, ALTURA DE LA PANTALLA
+    GLdouble modelview[16];             // 4x4 CAMARA + MODELO DE VISTA
+    GLdouble projection[16];            // 4x4 MATRIZ DE PROYECCION
+    GLfloat depth_z = 0;                // PROFUNDIDAD DEL CLICK EN 3D
     GLdouble world_x, world_y, world_z; // COORDENADAS 3D DEL MUNDO EN PANTALLA
 
     glGetDoublev(GL_MODELVIEW_MATRIX, modelview);
@@ -256,10 +256,9 @@ void Mundo::rightClick(int mouse_x, int mouse_y) {
                 }
                 else if (!Reglas::moveChecker(value, seleccion, destino, piezas.getBoard()))
                     return;
-
-                piezas.getBoard()[static_cast<int>(seleccion.x)][static_cast<int>(seleccion.z)] = 0;
-                piezas.getBoard()[static_cast<int>(destino.x)][static_cast<int>(destino.z)] = value;
-                imprimirMov(value, seleccion, destino);
+                
+                // ACTUALIZAMOS E IMPRIMIMOS EL MOVIMIENTO
+                Reglas::updateMov(value, seleccion, destino, piezas.getBoard());
 
                 piezas.deseleccionar();
                 platform.resetTileColors();
@@ -335,22 +334,4 @@ void Mundo::rightClick(int mouse_x, int mouse_y) {
         currentScreen = GAME_OVER;
         return;
     }
-}
-void Mundo::imprimirMov(int value, vector2D origen, vector2D destino) const {
-    char turno = (turnFlag == 0) ? 'w' : 'b';
-    char abrev = '?';
-    switch (abs(value)) {
-    case 1: abrev = 'P'; break; // Peón
-    case 2: abrev = 'R'; break; // Torre
-    case 3: abrev = 'H'; break; // Caballo
-    case 4: abrev = 'B'; break; // Alfil
-    case 5: abrev = 'Q'; break; // Reina
-    case 6: abrev = 'K'; break; // Rey
-    default: break;
-    }
-    char col_orig = 'e' - static_cast<int>(origen.x);
-    int row_orig = static_cast<int>(origen.z) + 1;
-    char col_dest = 'e' - static_cast<int>(destino.x);
-    int row_dest = static_cast<int>(destino.z) + 1;
-    std::cout << turno << " " << abrev << " " << col_orig << row_orig << " " << col_dest << row_dest << std::endl;
 }

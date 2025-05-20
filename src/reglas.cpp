@@ -192,7 +192,7 @@ bool Reglas::enroqueChecker(bool turn, vector2D origenKing, vector2D destinoKing
     for (int i = static_cast<int>(origenKing.x) + dir; i != static_cast<int>(rookPos.x); i += dir)
         if (board[i][oz] != 0)
             return false;
-    return (rookPos.x != -1 && (destinoKing.z == static_cast<float>(oz)) && (destinoKing.z == rookPos.z) && origenKing.x + (2 * dir) < 5 && destinoKing.x == (origenKing.x + (2 * dir)));
+    return (rookPos.x != -1 && (static_cast<float>(oz) == origenKing.z) && (origenKing.z == destinoKing.z) && (destinoKing.z == rookPos.z) && origenKing.x + (2 * dir) < 5 && destinoKing.x == (origenKing.x + (2 * dir)));
 }
 void Reglas::enroqueMove(bool turn, vector2D origenKing, vector2D destinoKing, std::array<std::array<int, 6>, 5>& board) {
     int rookVal = (turn ? -2 : 2);
@@ -202,10 +202,35 @@ void Reglas::enroqueMove(bool turn, vector2D origenKing, vector2D destinoKing, s
         if (board[i][origenKing.z] == rookVal)
             rookPos = { static_cast<float>(i), origenKing.z };
     }
-    int dir = rookPos.x - origenKing.x;
+    int dir = static_cast<int>(rookPos.x - origenKing.x);
     if (rookPos.x == -1 || dir == 0) return;
     dir = (dir > 0 ? 1 : -1);
     board[static_cast<int>(rookPos.x)][static_cast<int>(rookPos.z)] = 0;
     board[static_cast<int>(origenKing.x + dir)][static_cast<int>(rookPos.z)] = rookVal;
     return;
+}
+void Reglas::updateMov(int value, vector2D origen, vector2D destino, std::array<std::array<int, 6>, 5>& board){
+    if (origen.x != -1 && origen.z != -1 && destino.x != -1 && destino.z != -1) {
+        // ACTUALIZAMOS MOVIMIENTO DEL COMPUTADOR
+        board[static_cast<int>(destino.x)][static_cast<int>(destino.z)] = board[static_cast<int>(origen.x)][static_cast<int>(origen.z)];
+        board[static_cast<int>(origen.x)][static_cast<int>(origen.z)] = 0;
+
+        int pc = abs(value);
+        char abrev = '?';
+        switch (pc) {
+        case 1: abrev = 'P'; break; // Peón
+        case 2: abrev = 'R'; break; // Torre
+        case 3: abrev = 'H'; break; // Caballo
+        case 4: abrev = 'B'; break; // Alfil
+        case 5: abrev = 'Q'; break; // Reina
+        case 6: abrev = 'K'; break; // Rey
+        default: break;
+        }
+        char col_orig = 'e' - static_cast<int>(origen.x);
+        int row_orig = static_cast<int>(origen.z) + 1;
+        char col_dest = 'e' - static_cast<int>(destino.x);
+        int row_dest = static_cast<int>(destino.z) + 1;
+
+        std::cout << (value < 0 ? "b" : "w") << " " << abrev << " " << col_orig << row_orig << " " << col_dest << row_dest << std::endl;
+    }
 }

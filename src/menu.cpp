@@ -74,7 +74,7 @@ void Menu::cargarScores(int& whiteScore, int& blackScore) {
         in.close();
     }
     else {
-        std::cerr << "Error al cargar las puntuaciones.\n";
+        //std::cerr << "Error al cargar las puntuaciones.\n";
         whiteScore = 0;
         blackScore = 0;
     }
@@ -85,7 +85,7 @@ void Menu::setScores() {
         whiteScore++;
     else if (winnerText == "NEGRO")
         blackScore++;
-    std::cout << "Blanco " << whiteScore << " : " << blackScore << " Negro" << std::endl;
+    //std::cout << "Blanco " << whiteScore << " : " << blackScore << " Negro" << std::endl;
     guardarScores(whiteScore, blackScore);
 }
 void Menu::menuGameOver() {
@@ -96,6 +96,6 @@ void Menu::menuGameOver() {
     items.push_back(" ");
     items.push_back("BLANCO " + std::to_string(whiteScore) + " : " + std::to_string(blackScore) + " NEGRO");
     items.push_back(" ");
-    items.push_back("r : Reiniciar");
+    items.push_back("ENTER para jugar de nuevo");
     items.push_back("ESC para salir");
 }

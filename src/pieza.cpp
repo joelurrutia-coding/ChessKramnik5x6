@@ -67,7 +67,7 @@ void Pieza::seleccionar(int ix, int iz, int turnFlag, Plataforma& platform) {
         return;
     if ((turnFlag == 0 && pc < 0) || (turnFlag == 1 && pc > 0))
         return;
-    seleccion = vector2D(ix, iz);
+    seleccion = vector2D(static_cast<float>(ix), static_cast<float>(iz));
     platform.resetTileColors();
     Reglas::displayValidMoves(pc, seleccion, board, platform.getTiles());
 }
@@ -149,7 +149,7 @@ void Pieza::dibujarTablero() const {
             Pieza* piece = crear(value);
             if (!piece)
                 continue;
-            piece->setPosicion((i + 1), (j + 1));
+            piece->setPosicion(static_cast<float>(i + 1), static_cast<float>(j + 1));
             if (i == static_cast<int>(seleccion.x) && j == static_cast<int>(seleccion.z)) {
                 Color c = piece->color;
                 c.a = 150;
