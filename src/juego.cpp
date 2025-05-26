@@ -38,7 +38,6 @@ int main(int argc, char* argv[]){
 	glutKeyboardFunc(OnKeyboardDown);
 	glutMouseFunc(OnMouseClick);
 
-	//object.inicializa();
 	world.inicializa();
 
 	//Pasar el control a GLUT para que llame a los callbacks

@@ -1,14 +1,9 @@
-﻿  reglas.cpp
-C:\Users\prestamo_admin\Desktop\UPM\UPM - Asignaturas\UPM - S6\6 - Informática Ind\AjedrezKramnik\src\reglas.cpp(30,70): warning C4244: 'argument': conversion from 'float' to 'std::array<std::array<int,6>,5>::size_type', possible loss of data
-C:\Users\prestamo_admin\Desktop\UPM\UPM - Asignaturas\UPM - S6\6 - Informática Ind\AjedrezKramnik\src\reglas.cpp(30,81): warning C4244: 'argument': conversion from 'float' to 'std::array<int,6>::size_type', possible loss of data
-C:\Users\prestamo_admin\Desktop\UPM\UPM - Asignaturas\UPM - S6\6 - Informática Ind\AjedrezKramnik\src\reglas.cpp(30,134): warning C4244: 'argument': conversion from 'float' to 'std::array<std::array<int,6>,5>::size_type', possible loss of data
-C:\Users\prestamo_admin\Desktop\UPM\UPM - Asignaturas\UPM - S6\6 - Informática Ind\AjedrezKramnik\src\reglas.cpp(30,145): warning C4244: 'argument': conversion from 'float' to 'std::array<int,6>::size_type', possible loss of data
-C:\Users\prestamo_admin\Desktop\UPM\UPM - Asignaturas\UPM - S6\6 - Informática Ind\AjedrezKramnik\src\reglas.cpp(30,214): warning C4244: 'argument': conversion from 'float' to 'std::array<std::array<int,6>,5>::size_type', possible loss of data
-C:\Users\prestamo_admin\Desktop\UPM\UPM - Asignaturas\UPM - S6\6 - Informática Ind\AjedrezKramnik\src\reglas.cpp(30,225): warning C4244: 'argument': conversion from 'float' to 'std::array<int,6>::size_type', possible loss of data
-C:\Users\prestamo_admin\Desktop\UPM\UPM - Asignaturas\UPM - S6\6 - Informática Ind\AjedrezKramnik\src\reglas.cpp(30,279): warning C4244: 'argument': conversion from 'float' to 'std::array<std::array<int,6>,5>::size_type', possible loss of data
-C:\Users\prestamo_admin\Desktop\UPM\UPM - Asignaturas\UPM - S6\6 - Informática Ind\AjedrezKramnik\src\reglas.cpp(30,290): warning C4244: 'argument': conversion from 'float' to 'std::array<int,6>::size_type', possible loss of data
-C:\Users\prestamo_admin\Desktop\UPM\UPM - Asignaturas\UPM - S6\6 - Informática Ind\AjedrezKramnik\src\reglas.cpp(58,33): warning C4244: 'argument': conversion from 'float' to 'std::array<std::array<Losa,6>,5>::size_type', possible loss of data
-C:\Users\prestamo_admin\Desktop\UPM\UPM - Asignaturas\UPM - S6\6 - Informática Ind\AjedrezKramnik\src\reglas.cpp(58,43): warning C4244: 'argument': conversion from 'float' to 'std::array<Losa,6>::size_type', possible loss of data
-C:\Users\prestamo_admin\Desktop\UPM\UPM - Asignaturas\UPM - S6\6 - Informática Ind\AjedrezKramnik\src\reglas.cpp(189,13): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\prestamo_admin\Desktop\UPM\UPM - Asignaturas\UPM - S6\6 - Informática Ind\AjedrezKramnik\src\reglas.cpp(202,32): warning C4244: 'argument': conversion from 'float' to 'std::array<int,6>::size_type', possible loss of data
+﻿  computador.cpp
+C:\Users\prestamo_admin\Desktop\UPM\UPM - Asignaturas\UPM - S6\6 - Informática Ind\AjedrezKramnik\src\computador.cpp(19,25): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  juego.cpp
+  plataforma.cpp
+C:\Users\prestamo_admin\Desktop\UPM\UPM - Asignaturas\UPM - S6\6 - Informática Ind\AjedrezKramnik\src\plataforma.cpp(13,31): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\prestamo_admin\Desktop\UPM\UPM - Asignaturas\UPM - S6\6 - Informática Ind\AjedrezKramnik\src\plataforma.cpp(13,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  reglas.cpp
+  Generating Code...
   Juego.vcxproj -> C:\Users\prestamo_admin\Desktop\UPM\UPM - Asignaturas\UPM - S6\6 - Informática Ind\AjedrezKramnik\bin\Juego.exe

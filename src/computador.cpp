@@ -192,7 +192,6 @@ bool Computador::makeMoveKingSafe(bool turnFlag, bool autopilotFlag, std::array<
             }
         }
     }
-    // Prioridad de estrategias: capturar al enemigo atacante > mover el rey > bloquear el camino de ataque.
     if (foundCapture) {
         movOrigPos = bestCaptureOrigPos;
         movOrigVal = bestCaptureOrigVal;
