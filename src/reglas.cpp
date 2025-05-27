@@ -174,75 +174,6 @@ bool Reglas::jaqueMate(bool turnFlag, std::array<std::array<int, 6>, 5>& board, 
     }
     return true; // JAQUE MATE!
 }
-/*
-bool Reglas::jaqueMate(bool turnFlag, std::array<std::array<int, 6>, 5>& board, std::array<std::array<Losa, 6>, 5>& tiles){
-    int kingValue = (turnFlag ? 6 : -6);
-    vector2D kingPos = pieceFinder(kingValue, board);
-    if (kingPos.x == -1) return true;  // REY NO ENCONTRADO
-
-    bool legalMove = false;
-    for (int i = 0; i < 5 && !legalMove; i++) {
-        for (int j = 0; j < 6 && !legalMove; j++) {
-
-            int destVal = board[i][j];
-            if (turnFlag == 0) {
-                if (destVal >= 0)
-                    continue;
-            }
-            else {
-                if (destVal <= 0)
-                    continue;
-            }
-            vector2D piecePos(static_cast<float>(i), static_cast<float>(j));
-
-            // PROBAMOS CADA POSIBLE MOVIMIENTO
-            for (int k = 0; k < 5 && !legalMove; k++) {
-                for (int l = 0; l < 6 && !legalMove; l++) {
-                    
-                    if (i == k && j == l)
-                        continue; // SALTAMOS LA PROPIA POSICION ACTUAL DE LA PIEZA 
-                    vector2D dest(static_cast<float>(k), static_cast<float>(l));
-
-                    if (!moveChecker(destVal, piecePos, dest, board))
-                        continue; // SALTAMOS LOS MOVIMIENTOS INVALIDOS O ILEGALES
-
-                    std::array<std::array<int, 6>, 5> boardCopy = board;
-                    boardCopy[k][l] = destVal;
-                    boardCopy[i][j] = 0;
-
-                    vector2D newKingPos;
-                    if ((turnFlag == 0 && destVal == 6) || (turnFlag == 1 && abs(destVal) == 6))
-                        newKingPos = dest;
-                    else
-                        newKingPos = pieceFinder(kingValue, boardCopy);
-                    if (newKingPos.x == -1)
-                        continue;  
-
-                    bool stillInCheck = false;
-                    for (int x = 0; x < 5 && !stillInCheck; x++) {
-                        for (int z = 0; z < 6 && !stillInCheck; z++) {
-                            int origVal = boardCopy[x][z];
-                            if (origVal == 0)
-                                continue;
-                            if (turnFlag == 0 && origVal <= 0)
-                                continue;
-                            if (turnFlag == 1 && origVal >= 0)
-                                continue;
-                            vector2D origPos(static_cast<float>(x), static_cast<float>(z));
-                            if (moveChecker(origVal, origPos, newKingPos, boardCopy))
-                                stillInCheck = true;
-                        }
-                    }
-                    if (!stillInCheck) {
-                        legalMove = true;
-                    }
-                }
-            }
-        }
-    }
-    return !legalMove;
-}
-*/
 bool Reglas::enroqueChecker(bool turn, vector2D origenKing, vector2D destinoKing, std::array<std::array<int, 6>, 5>& board) {
     int rookVal = (turn ? -2 : 2);
     int oz = (turn ? 5 : 0);
@@ -271,8 +202,6 @@ void Reglas::enroqueMove(bool turn, vector2D origenKing, vector2D destinoKing, s
     int dir = static_cast<int>(origenRook.x - origenKing.x);
     if (origenRook.x == -1 || dir == 0) return;
     dir = (dir > 0 ? 1 : -1);
-    //board[static_cast<int>(origenRook.x)][static_cast<int>(origenRook.z)] = 0;
-    //board[static_cast<int>(origenKing.x + dir)][static_cast<int>(origenRook.z)] = rookVal;
     updateMov(rookVal, origenRook, {origenKing.x + static_cast<float>(dir), origenRook.z}, board);
     return;
 }
