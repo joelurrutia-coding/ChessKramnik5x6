@@ -12,10 +12,13 @@ void Menu::setScreen(MenuScreen screen) {
     items.clear();
     (currentScreen == MENU_INICIO) ? menuStart() : menuGameOver();
 }
-void Menu::renderText(float y, const std::string& text) {
+void Menu::renderText(float y, const std::string& text, bool titleStyle) {
     glPushMatrix();
-    glTranslatef(-0.7f, y, 0.0f);  // Alineamiento a izquierda
-    glScalef(0.0005f, 0.001f, 0.001f);  // Escalado de texto
+    glTranslatef(-0.6f, y, 0.0f);  // Alineamiento a izquierda
+    if (titleStyle)
+        glScalef(0.0011f, 0.002f, 0.002f);
+    else
+        glScalef(0.0005f, 0.001f, 0.001f);  // Escalado de texto
     for (char c : text) {
         glutStrokeCharacter(GLUT_STROKE_ROMAN, c);
     }
@@ -34,11 +37,13 @@ void Menu::dibuja() {
     glDisable(GL_DEPTH_TEST);
     glColor3f(1.0f, 1.0f, 1.0f);
 
-    float y = 0.45f;
+    float y = 0.5f;
     float dy = -0.15f;
+    int i = 0;
     for (const auto& line : items) {
-        renderText(y, line);
+        renderText(y, line, false);
         y += dy;
+        i++;
     }
     glEnable(GL_DEPTH_TEST);
     glPopMatrix();
@@ -47,15 +52,26 @@ void Menu::dibuja() {
     glMatrixMode(GL_MODELVIEW);
 }
 void Menu::menuStart() {
-    items.reserve(8);
-    items.push_back("AJEDREZ KRAMNIK");
-    items.push_back("Click izq | dcho : seleccionar | mover");
-    items.push_back("m : vs maquina");
-    items.push_back("g : guardar tablero actual");
-    items.push_back("c : cargar ultimo tablero");
-    items.push_back("v : vista 2D o 3D");
-    items.push_back("t : tablero 'Esquinas opuestas' o 'Petty'");
-    items.push_back("ENTER para comenzar");
+    items.clear();
+    mostrarInstrucciones
+        ? (items.reserve(8), 
+            items.push_back("INSTRUCCIONES:"),
+            items.push_back("Click izq | dcho : seleccionar | mover"),
+            items.push_back("G : guardar tablero actual"),
+            items.push_back("C : cargar ultimo tablero"),
+            items.push_back("M : cambiar VS"),
+            items.push_back("T : cambiar modo tablero"),
+            items.push_back("V : vista 2D o 3D"), 
+            items.push_back("P : pausar"))
+        : (items.reserve(8), 
+            items.push_back("AJEDREZ"),
+            items.push_back("GUERRA-SANTA"),
+            items.push_back(" "),
+            items.push_back(vsMaquina ? "Jugador VS Maquina" : "Jugador VS Jugador"),
+            items.push_back(modoPetty ? "Modo Petty" : "Modo Esquinas Opuestas"),
+            items.push_back("I : instrucciones"),
+            items.push_back("ENTER para comenzar"),
+            items.push_back("ESC para salir"));
 }
 void Menu::setWinner(const std::string& winner) {
     winnerText = winner;

@@ -210,6 +210,7 @@ void Reglas::enroqueMove(bool turn, vector2D origenKing, vector2D destinoKing, s
 }
 void Reglas::updateMov(int value, vector2D origen, vector2D destino, std::array<std::array<int, 6>, 5>& board){
     if (origen.x != -1 && origen.z != -1 && destino.x != -1 && destino.z != -1) {         
+        
         // CORONACION DEL PEON
         if (value == 1 && destino.z == 5) {
             ETSIDI::play("sonidos/coronacion.mp3");
@@ -219,6 +220,7 @@ void Reglas::updateMov(int value, vector2D origen, vector2D destino, std::array<
             ETSIDI::play("sonidos/coronacion.mp3");
             board[static_cast<int>(origen.x)][static_cast<int>(origen.z)] = -5; // Peon a Reina
         }
+
         int destVal = board[static_cast<int>(destino.x)][static_cast<int>(destino.z)];
         if (destVal == 0) {
             ETSIDI::play("sonidos/desplazamiento.mp3");

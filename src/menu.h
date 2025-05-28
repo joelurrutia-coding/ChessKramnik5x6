@@ -19,14 +19,16 @@ public:
     void setScores();
     void guardarScores(int whiteScore, int blackScore);
     void cargarScores(int& whiteScore, int& blackScore);
-
+    bool vsMaquina = false;
+    bool modoPetty = false; 
+    bool mostrarInstrucciones = false;
 private:
     MenuScreen currentScreen;
     std::vector<std::string> items;
     std::string winnerText;
     int whiteScore, blackScore;
 
-    void renderText(float y, const std::string& text);
+    void renderText(float y, const std::string& text, bool titleStyle);
     void menuStart();
     void menuGameOver();
 };

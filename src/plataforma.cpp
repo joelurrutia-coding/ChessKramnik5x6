@@ -26,7 +26,7 @@ Plataforma::~Plataforma() {}
 void Plataforma::dibuja() const {
 	glPushMatrix();
 	//TEXTURIZADO DEL SUELO
-	texturizado(-10, 0, -10, 26, 26, "imagenes/suelo.png", color.a);
+	texturizado(-10, 0, -9.75, 26, 26.5, "imagenes/fondoguerra.png", color.a);
 
 	glBegin(GL_QUADS);
 	// Abajo

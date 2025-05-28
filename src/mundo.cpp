@@ -132,6 +132,27 @@ void Mundo::tecla(unsigned char key) {
             fullscrnFlag = !fullscrnFlag;
             return;
         }
+        else if (key == 'i'||key=='I'){
+			ETSIDI::play("sonidos/carga.mp3");
+			menu.mostrarInstrucciones = !menu.mostrarInstrucciones;
+			return;
+		}
+		else if (key == 'm' || key == 'M') {
+			ETSIDI::play("sonidos/versus.mp3");
+            menu.vsMaquina = !menu.vsMaquina;
+			modoVSmaquina();
+			return;
+		}
+		else if (key == 27) { // ESC
+			exit(0);
+		}
+		else if (key == 't' || key == 'T') {
+            ETSIDI::play("sonidos/carga.mp3");
+			menu.modoPetty = !menu.modoPetty;
+            modeFlag = menu.modoPetty;
+			piezas.setMode(modeFlag);
+			return;
+		}
         break;
     case PLAYING:
         if (!rotationFlag) {
@@ -171,8 +192,9 @@ void Mundo::tecla(unsigned char key) {
                 ETSIDI::play("sonidos/versus.mp3");
                 modoVSmaquina();
                 break;
-            case 27:
-                exit(0);
+            case 'p': case 'P':  
+                currentScreen = START;
+                glutPostRedisplay();
                 break;
             default:
                 break;

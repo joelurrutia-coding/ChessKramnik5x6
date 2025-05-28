@@ -16,23 +16,26 @@
 
 GLUquadric* getSharedQuadric() {
     static GLUquadric* sharedQuad = gluNewQuadric();
-    return sharedQuad;
+    return sharedQuad; //Devuelve el puntero
 }
-Pieza::Pieza() :
+Pieza::Pieza() : //Constructor por defecto
     size(1.0f),
     color(none),
-    posicion(0.0f, 0.0f),
-    seleccion(-1, -1), board({}),
-    othermode(false)
+    posicion(0.0f, 0.0f), 
+    seleccion(-1, -1), //No hay selección
+	board({}),      //Inicializa el tablero vacío
+	othermode(false)  //Inicializa el modo de juego a false (modo ESQUINAS OPUESTAS)
 {}
-Pieza::~Pieza() {}
+Pieza::~Pieza() {} 
 
-Pieza* Pieza::crear(int pieceValue) const {
+Pieza* Pieza::crear(int pieceValue) const { //Crea una nueva pieza según el valor de la pieza
     if (pieceValue == 0)
-        return nullptr;
-    int type = abs(pieceValue);
-    Pieza* piece = nullptr;
-    switch (type) {
+		return nullptr;     //Si el valor es 0, no hay pieza
+
+	int type = abs(pieceValue); //Usamos abs para obtener el valor absoluto, ya que el tipo de pieza no depende del color.
+    Pieza* piece = nullptr;     //Este puntero apuntará a la pieza creada
+
+	switch (type) {         //Según el valor absoluto de pieceValue, crea dinámicamente un objeto del tipo adecuado. 
     case 1:
         piece = new Peon;
         break;
@@ -54,7 +57,7 @@ Pieza* Pieza::crear(int pieceValue) const {
     default:
         break;
     }
-    if (piece) {
+	if (piece) {            //Este if, define el color de la pieza según el valor de pieceValue.
         if (pieceValue < 0)
             piece->setColor(black);
         else
