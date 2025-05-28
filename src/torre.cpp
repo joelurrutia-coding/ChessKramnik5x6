@@ -1,5 +1,5 @@
 #include "torre.h"
-#include "freeglut.h"
+#include "textura.h"
 
 Torre::Torre() {
     size = 0.35f;
@@ -12,6 +12,10 @@ bool Torre::mueve() {
 
 void Torre::dibuja() const {
     glPushMatrix();
+    //TEXTURIZADO DE LA TORRE
+    if (color == white) texturizado(posicion.x - 0.37, 5.01, posicion.z - 0.49, 0.75, 0.99, "imagenes/torreblanca.png", color.a);
+    else texturizado(posicion.x + 0.4, 5.01, posicion.z + 0.49, -0.8, -0.99, "imagenes/torrenegra.png", color.a);
+
     glTranslatef(posicion.x, 0.4f, posicion.z);
     glColor4ub(color.r, color.g, color.b, color.a);
     GLUquadric* quad = getSharedQuadric();

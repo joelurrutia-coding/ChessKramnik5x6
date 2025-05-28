@@ -1,5 +1,5 @@
 #include "reina.h"
-#include "freeglut.h"
+#include "textura.h"
 
 Reina::Reina() {
     size = 1.0f;
@@ -12,6 +12,10 @@ bool Reina::mueve() {
 
 void Reina::dibuja() const {
     glPushMatrix();
+    //TEXTURIZADO DE LA REINA
+    if (color == white) texturizado(posicion.x - 0.37, 5.01, posicion.z - 0.49, 0.75, 0.99, "imagenes/reinablanca.png", color.a);
+    else texturizado(posicion.x + 0.4, 5.01, posicion.z + 0.49, -0.8, -0.99, "imagenes/reinanegra.png", color.a);
+
     glTranslatef(posicion.x, 0.4f, posicion.z);
     glColor4ub(color.r, color.g, color.b, color.a);
     GLUquadric* quad = getSharedQuadric();
@@ -34,7 +38,7 @@ void Reina::dibuja() const {
     glutSolidCone(size * 0.048f, size * 0.08f, 8, 8);
     glTranslatef(0.0f, 0.0f, size * 0.08f);
     glutSolidSphere(size * 0.028f, 6, 6);
-    if ((color.r == black.r) && (color.g == black.g) && (color.b == black.b)) {
+    if (color == black) {
         glTranslatef(0, 0, -size * 0.14f);
         glRotatef(45, 0, 1, 0);
         glutSolidCone(size * 0.08f, size * 0.28f, 4, 4);

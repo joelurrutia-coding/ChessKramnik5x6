@@ -16,10 +16,12 @@ void Losa::dibuja() const {
     glVertex3f(posicion.x + 1.5f * size, 0.395f, posicion.z + 1.5f * size);
     glVertex3f(posicion.x + 0.5f * size, 0.395f, posicion.z + 1.5f * size);
     glNormal3f(0.0f, 1.0f, 0.0f);
-    //glVertex3f(posicion.x + 0.5f * size, 5.0f, posicion.z + 0.5f * size);
-    //glVertex3f(posicion.x + 1.5f * size, 5.0f, posicion.z + 0.5f * size);
-    //glVertex3f(posicion.x + 1.5f * size, 5.0f, posicion.z + 1.5f * size);
-    //glVertex3f(posicion.x + 0.5f * size, 5.0f, posicion.z + 1.5f * size);
+    
+    glVertex3f(posicion.x + 0.5f * size, 5.0f, posicion.z + 0.5f * size);
+    glVertex3f(posicion.x + 1.5f * size, 5.0f, posicion.z + 0.5f * size);
+    glVertex3f(posicion.x + 1.5f * size, 5.0f, posicion.z + 1.5f * size);
+    glVertex3f(posicion.x + 0.5f * size, 5.0f, posicion.z + 1.5f * size);
+    
     glEnd();
     glPopMatrix();
 }

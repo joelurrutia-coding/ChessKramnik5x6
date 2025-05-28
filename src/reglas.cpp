@@ -6,6 +6,7 @@
 #include "vector2D.h"
 #include <vector>
 #include "plataforma.h"
+#include "ETSIDI.h"
 
 Reglas::Reglas() {};
 
@@ -97,6 +98,7 @@ bool Reglas::jaque(bool turnFlag, std::array<std::array<int, 6>, 5>& board, std:
             if (pc == 0) continue;
             if ((turnFlag == 0 && pc <= 0) || (turnFlag == 1 && pc >= 0))
                 continue; 
+
             vector2D piecePos = { static_cast<float>(i), static_cast<float>(j) };
             if (moveChecker(pc, piecePos, kingPos, board)) {
                 displayDanger(kingPos, tiles); // REY EN PELIGRO
@@ -203,10 +205,27 @@ void Reglas::enroqueMove(bool turn, vector2D origenKing, vector2D destinoKing, s
     if (origenRook.x == -1 || dir == 0) return;
     dir = (dir > 0 ? 1 : -1);
     updateMov(rookVal, origenRook, {origenKing.x + static_cast<float>(dir), origenRook.z}, board);
+    ETSIDI::play("sonidos/enroque.mp3");
     return;
 }
 void Reglas::updateMov(int value, vector2D origen, vector2D destino, std::array<std::array<int, 6>, 5>& board){
-    if (origen.x != -1 && origen.z != -1 && destino.x != -1 && destino.z != -1) {
+    if (origen.x != -1 && origen.z != -1 && destino.x != -1 && destino.z != -1) {         
+        // CORONACION DEL PEON
+        if (value == 1 && destino.z == 5) {
+            ETSIDI::play("sonidos/coronacion.mp3");
+            board[static_cast<int>(origen.x)][static_cast<int>(origen.z)] = 5; // Peon a Reina
+        }
+        else if (value == -1 && destino.z == 0) {
+            ETSIDI::play("sonidos/coronacion.mp3");
+            board[static_cast<int>(origen.x)][static_cast<int>(origen.z)] = -5; // Peon a Reina
+        }
+        int destVal = board[static_cast<int>(destino.x)][static_cast<int>(destino.z)];
+        if (destVal == 0) {
+            ETSIDI::play("sonidos/desplazamiento.mp3");
+        }
+        else {
+            ETSIDI::play("sonidos/ataque.mp3");
+        }
         // ACTUALIZAMOS MOVIMIENTO DEL COMPUTADOR
         board[static_cast<int>(destino.x)][static_cast<int>(destino.z)] = board[static_cast<int>(origen.x)][static_cast<int>(origen.z)];
         board[static_cast<int>(origen.x)][static_cast<int>(origen.z)] = 0;

@@ -49,7 +49,7 @@ void Menu::dibuja() {
 void Menu::menuStart() {
     items.reserve(8);
     items.push_back("AJEDREZ KRAMNIK");
-    items.push_back("Click izq | dcho : seleccionar | posicionar");
+    items.push_back("Click izq | dcho : seleccionar | mover");
     items.push_back("m : vs maquina");
     items.push_back("g : guardar tablero actual");
     items.push_back("c : cargar ultimo tablero");

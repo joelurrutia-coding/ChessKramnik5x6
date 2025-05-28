@@ -1,16 +1,16 @@
 #include "plataforma.h"
 #include "color.h"
-#include "freeglut.h"
 #include <vector>
 #include "losa.h"
 #include <array>
+#include "textura.h"
 
 Plataforma::Plataforma(): 
 color(border), limite({ 6, 7 }) 
 {
 	for (int j = 0; j < 6; ++j) {
 		for (int i = 0; i < 5; ++i) {
-			tiles[i][j].setPosicion(i, j);
+			tiles[i][j].setPosicion(static_cast<float>(i), static_cast<float>(j));
 			bool isBtile = (i + j) % 2 == 0; 
 			if (isBtile) {
 				tiles[i][j].setColor({ btile.r, btile.g, btile.b, btile.a });
@@ -24,6 +24,10 @@ color(border), limite({ 6, 7 })
 Plataforma::~Plataforma() {}
 
 void Plataforma::dibuja() const {
+	glPushMatrix();
+	//TEXTURIZADO DEL SUELO
+	texturizado(-10, 0, -10, 26, 26, "imagenes/suelo.png", color.a);
+
 	glBegin(GL_QUADS);
 	// Abajo
 	glNormal3f(0.0f, -1.0f, 0.0f);
@@ -72,7 +76,8 @@ void Plataforma::dibuja() const {
         for (const auto& tile : i) {
             tile.dibuja();
         }
-    }
+    }	
+	glPopMatrix();
 }
 void Plataforma::resetTileColors() {
 	for (int j = 0; j < 6; ++j) {

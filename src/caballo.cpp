@@ -1,5 +1,5 @@
 #include "caballo.h"
-#include "freeglut.h"
+#include "textura.h"
 
 Caballo::Caballo() {
     size = 1.0f;
@@ -12,6 +12,10 @@ bool Caballo::mueve() {
 
 void Caballo::dibuja() const {
     glPushMatrix();
+    //TEXTURIZADO DEL CABALLO
+    if (color == white) texturizado(posicion.x - 0.37, 5.01, posicion.z - 0.49, 0.75, 0.99, "imagenes/caballoblanco.png", color.a);
+    else texturizado(posicion.x + 0.4, 5.01, posicion.z + 0.49, -0.8, -0.99, "imagenes/caballonegro.png", color.a);
+
     glTranslatef(posicion.x, 0.4f, posicion.z);
     glColor4ub(color.r, color.g, color.b, color.a);
     GLUquadric* quad = getSharedQuadric();
@@ -30,7 +34,7 @@ void Caballo::dibuja() const {
     glRotatef(-90, -1, 0, 0);
     glRotatef(90, 0, 1, 0);
     glTranslatef(0.0f, 0.0f, -size * 0.04f);
-    if ((color.r == black.r) && (color.g == black.g) && (color.b == black.b)) {
+    if (color == black) {
         glTranslatef(0.0f, 0.0f, size * 0.08f);
         glRotatef(180, 0, -1, 0);
     }

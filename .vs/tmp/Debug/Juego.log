@@ -1,9 +1,4 @@
-﻿  computador.cpp
-C:\Users\prestamo_admin\Desktop\UPM\UPM - Asignaturas\UPM - S6\6 - Informática Ind\AjedrezKramnik\src\computador.cpp(19,25): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  juego.cpp
-  plataforma.cpp
-C:\Users\prestamo_admin\Desktop\UPM\UPM - Asignaturas\UPM - S6\6 - Informática Ind\AjedrezKramnik\src\plataforma.cpp(13,31): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\prestamo_admin\Desktop\UPM\UPM - Asignaturas\UPM - S6\6 - Informática Ind\AjedrezKramnik\src\plataforma.cpp(13,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+﻿  pieza.cpp
   reglas.cpp
-  Generating Code...
+  Generando código...
   Juego.vcxproj -> C:\Users\prestamo_admin\Desktop\UPM\UPM - Asignaturas\UPM - S6\6 - Informática Ind\AjedrezKramnik\bin\Juego.exe

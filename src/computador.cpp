@@ -16,7 +16,7 @@ void Computador::makeMoveOpening(bool openingFlag, bool turnFlag, bool autopilot
     if (!openingFlag || !turnFlag || !autopilotFlag)
         return;
     // RANDOM DE 0 A 6
-    std::srand(std::time(nullptr));
+    std::srand(static_cast<unsigned int>(std::time(nullptr)));
     int r = std::rand() % 7;
 
     if (r >= 0 && r <= 4) {
