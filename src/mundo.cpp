@@ -269,7 +269,7 @@ void Mundo::rightClick(int mouse_x, int mouse_y) {
         vector2D seleccion = piezas.getSeleccion();
         if (seleccion.x != -1 && seleccion.z != -1) {
             int value = piezas.getBoard()[static_cast<int>(seleccion.x)][static_cast<int>(seleccion.z)];
-            if ((turnFlag == 0 && value > 0) || (turnFlag == 1 && value < 0)) {
+            if ((!turnFlag && value > 0) || (turnFlag && value < 0)) {
 
                 if (seleccion.z == destino.z && seleccion.x == destino.x)
                     return;

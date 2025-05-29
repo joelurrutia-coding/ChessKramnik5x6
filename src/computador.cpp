@@ -17,9 +17,9 @@ void Computador::makeMoveOpening(bool openingFlag, bool turnFlag, bool autopilot
         return;
     // RANDOM DE 0 A 6
     std::srand(static_cast<unsigned int>(std::time(nullptr)));
-    int r = std::rand() % 7;
+    int r = 1 + std::rand() % 6;
 
-    if (r >= 0 && r <= 4) {
+    if (r > 0 && r <= 4) {
         Reglas::updateMov(-1, {static_cast<float>(r), 4.0f}, {static_cast<float>(r), 3.0f}, board);
     }
     else if (r == 5) {  

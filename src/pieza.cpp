@@ -70,7 +70,7 @@ void Pieza::seleccionar(int ix, int iz, int turnFlag, Plataforma& platform) {
     int pc = board[ix][iz];
     if (pc == 0)
         return;
-    if ((turnFlag == 0 && pc < 0) || (turnFlag == 1 && pc > 0))
+    if ((!turnFlag && pc < 0) || (turnFlag && pc > 0))
         return;
     ETSIDI::play("sonidos/seleccion.mp3");
     seleccion = vector2D(static_cast<float>(ix), static_cast<float>(iz));

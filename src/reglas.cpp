@@ -65,7 +65,7 @@ void Reglas::displayValidMoves(int value, vector2D origen, std::array<std::array
 }
 void Reglas::displayCastling(int value, vector2D origen, std::array<std::array<int, 6>, 5>& board, std::array<std::array<Losa, 6>, 5>& tiles) {
     int oz = (value < 0 ? 5 : 0);
-    for (int i = 0; i<5; ++i){
+    for (int i = 0; i < 5; ++i){
         if (abs(value) == 6 && enroqueChecker(value < 0, origen, { static_cast<float>(i), static_cast<float>(oz) }, board)) {
             tiles[i][oz].setColor({ enroque });
         }
@@ -96,7 +96,7 @@ bool Reglas::jaque(bool turnFlag, std::array<std::array<int, 6>, 5>& board, std:
         for (int i = 0; i < 5; ++i) {
             int pc = board[i][j];
             if (pc == 0) continue;
-            if ((turnFlag == 0 && pc <= 0) || (turnFlag == 1 && pc >= 0))
+            if ((!turnFlag && pc <= 0) || (turnFlag && pc >= 0))
                 continue; 
 
             vector2D piecePos = { static_cast<float>(i), static_cast<float>(j) };
@@ -119,7 +119,7 @@ bool Reglas::jaqueMate(bool turnFlag, std::array<std::array<int, 6>, 5>& board, 
         for (int j = 0; j < 6; j++) {
 
             int destVal = board[i][j];
-            if (turnFlag == 0) {
+            if (!turnFlag) {
                 if (destVal >= 0)
                     continue;
             }
@@ -145,7 +145,7 @@ bool Reglas::jaqueMate(bool turnFlag, std::array<std::array<int, 6>, 5>& board, 
                     boardCopy[i][j] = 0;
 
                     vector2D newKingPos;
-                    if ((turnFlag == 0 && destVal == 6) || (turnFlag == 1 && abs(destVal) == 6))
+                    if ((!turnFlag && destVal == 6) || (turnFlag && abs(destVal) == 6))
                         newKingPos = dest;
                     else
                         newKingPos = pieceFinder(kingValue, boardCopy);
@@ -159,9 +159,9 @@ bool Reglas::jaqueMate(bool turnFlag, std::array<std::array<int, 6>, 5>& board, 
                             int origVal = boardCopy[x][z];
                             if (origVal == 0)
                                 continue;
-                            if (turnFlag == 0 && origVal <= 0)
+                            if (!turnFlag && origVal <= 0)
                                 continue;
-                            if (turnFlag == 1 && origVal >= 0)
+                            if (turnFlag && origVal >= 0)
                                 continue;
                             vector2D origPos(static_cast<float>(x), static_cast<float>(z));
                             if (moveChecker(origVal, origPos, newKingPos, boardCopy))
